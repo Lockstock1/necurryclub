@@ -347,9 +347,20 @@
       'Epping': [51.6940, 0.1130],
       'London (Brick Lane)': [51.5220, -0.0720],
       'London (Old Street, Shoreditch)': [51.5265, -0.0878],
+      'London': [51.5074, -0.1278],
       'Maldon': [51.7310, 0.6750],
       'Danbury': [51.7220, 0.5830],
-      'Kelvedon': [51.8380, 0.7050]
+      'Kelvedon': [51.8380, 0.7050],
+      'Halstead': [51.9450, 0.6400],
+      'Sudbury': [52.0380, 0.7270],
+      'Hatfield Heath': [51.8100, 0.2350],
+      'Sawbridgeworth': [51.8140, 0.1530],
+      'Coggeshall Hamlet': [51.8650, 0.6850],
+      'Bradwell': [51.7350, 0.9050],
+      'North Weald': [51.7230, 0.1680],
+      'Hatfield Peveral': [51.7750, 0.5950],
+      'Writtle': [51.7290, 0.4280],
+      'Saffron Walden': [52.0230, 0.2430]
     };
 
     // Group visits by location

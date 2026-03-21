@@ -27,7 +27,7 @@ const curryNights = [
     location: "Chelmsford",
     date: "2021-11-12",
     organiser: "Wodge",
-    pub: "N/A",
+    pub: "The Ship",
     rating: 4,
     comment: "Very yummy curry house, 9/10. Wodge drove because of an early start. Pete bailed again — his secretary needs sacking.",
     image: "images/IMG-20211112-WA0001.jpg",
@@ -43,7 +43,7 @@ const curryNights = [
     rating: 4,
     comment: "The Christmas special. Pete organised Chequers and Razza. Christmas jumpers were encouraged. Andy had a sore head the next morning. Wodge was sweating Dopiaza.",
     image: "images/IMG-20211215-WA0000.jpg",
-    images: ["images/IMG-20211215-WA0000.jpg","images/IMG-20211215-WA0001.jpg","images/IMG-20211215-WA0002.jpg","images/IMG-20211215-WA0004.jpg"]
+    images: ["images/IMG-20211215-WA0000.jpg","images/IMG-20211215-WA0001.jpg","images/IMG-20211215-WA0002.jpg"]
   },
   {
     id: 4,
@@ -54,8 +54,8 @@ const curryNights = [
     pub: "The Cock Inn",
     rating: 4,
     comment: "Interesting pub and quality meal. Good work Mr Bott. Louise provided taxi service there, cab back from the station.",
-    image: "images/IMG-20220119-WA0000.jpg",
-    images: ["images/IMG-20220119-WA0000.jpg","images/IMG-20220121-WA0001.jpg"]
+    image: "images/IMG-20220121-WA0001.jpg",
+    images: ["images/IMG-20220121-WA0001.jpg"]
   },
   {
     id: 5,
@@ -66,8 +66,8 @@ const curryNights = [
     pub: "The Swan / Welsh Princess",
     rating: 4,
     comment: "Pete missed it due to Covid despite 3 jabs. The remaining lads had a cobra for him. Really yummy food.",
-    image: "images/IMG-20220211-WA0000.jpg",
-    images: ["images/IMG-20220211-WA0000.jpg","images/IMG-20220211-WA0002.jpg","images/IMG-20220211-WA0003.jpg","images/IMG-20220211-WA0004.jpg"]
+    image: "images/IMG-20220211-WA0002.jpg",
+    images: ["images/IMG-20220211-WA0002.jpg","images/IMG-20220211-WA0003.jpg","images/IMG-20220211-WA0004.jpg"]
   },
   {
     id: 6,
@@ -97,7 +97,7 @@ const curryNights = [
     location: "Stansted Mountfitchet",
     date: "2022-05-20",
     organiser: "Stephen Brazier",
-    pub: "N/A",
+    pub: "Kings Arms",
     rating: 1,
     comment: "Stephen booked it in 'Takley' — Andy's sources confirmed it was Stansted Mountfitchet. Stephen drove as he wasn't in the right frame of mind to drink. Legend status: 1 star.",
     image: null
@@ -105,10 +105,10 @@ const curryNights = [
   {
     id: 9,
     name: "Lounge India",
-    location: "Felsted",
+    location: "Braintree",
     date: "2022-06-24",
     organiser: "John Garrett",
-    pub: "The Swan",
+    pub: "The Picture Palace",
     rating: 4,
     comment: "A good one not to be missed. Pete made a rare appearance. Table booked for 5 — the gang was back together.",
     image: "images/IMG-20220624-WA0000.jpg"
@@ -116,10 +116,10 @@ const curryNights = [
   {
     id: 10,
     name: "Jalsa Ghar",
-    location: "Felsted",
+    location: "Great Dunmow",
     date: "2022-08-05",
     organiser: "Wodge",
-    pub: "N/A",
+    pub: "Not Applicable",
     rating: 3,
     comment: "Originally planned for Thaxted but transport issues meant a local pivot. Wodge celebrated becoming self-employed with a celebratory beer or two.",
     image: "images/IMG-20220805-WA0000.jpg"
@@ -153,7 +153,7 @@ const curryNights = [
     location: "Witham",
     date: "2022-11-26",
     organiser: "Wodge",
-    pub: "N/A",
+    pub: "Battlesford Court",
     rating: 3,
     comment: "A one-off change in proceedings — Turkish instead of Indian due to a glut of curries. Fun fact: Witham had 34 pubs in the 90s.",
     image: null
@@ -176,18 +176,18 @@ const curryNights = [
     location: "Great Baddow",
     date: "2023-01-20",
     organiser: "Wodge",
-    pub: "N/A",
+    pub: "The Star",
     rating: 5,
     comment: "A new 5 star restaurant! Good work Rog! It lived up to its promise — good to have fire again. Stephen made it back on his feet.",
     image: null
   },
   {
     id: 16,
-    name: "Cafe Masala",
-    location: "Bishops Stortford",
+    name: "Taj Mahal",
+    location: "Braintree",
     date: "2023-02-10",
     organiser: "John Garrett",
-    pub: "N/A",
+    pub: "The Eagle",
     rating: 4,
     comment: "You can really taste the 5 stars for hygiene. John was accused of treason for going without the full crew.",
     image: "images/IMG-20230210-WA0000.jpg"
@@ -201,8 +201,8 @@ const curryNights = [
     pub: "The Eagle",
     rating: 2.5,
     comment: "Taylor's debut as organiser. Naan breads inedible, no tablecloths, no music, slow service. John tried hard for a 3 but couldn't do it. Taylor called it totally unfair.",
-    image: "images/IMG-20230222-WA0001.jpg",
-    images: ["images/IMG-20230222-WA0001.jpg","images/IMG-20230222-WA0002.jpg","images/IMG-20230225-WA0002.jpg"]
+    image: null,
+    images: []
   },
   {
     id: 18,
@@ -210,30 +210,31 @@ const curryNights = [
     location: "Bishops Stortford",
     date: "2023-03-17",
     organiser: "John Garrett",
-    pub: "N/A",
+    pub: "The Cock Inn",
     rating: 3,
     comment: "Return trip to Cafe Masala. Taylor was at Sadler Towers. Stephen made it along this time.",
-    image: "images/IMG-20230318-WA0000.jpg"
+    image: null,
+    images: []
   },
   {
     id: 19,
-    name: "Cinnamon Tree",
+    name: "The Coriander",
     location: "Ongar",
     date: "2023-04-28",
     organiser: "Andy Bott",
-    pub: "N/A",
+    pub: "The Cock",
     rating: 4.5,
     comment: "Clear winner — Pete would even take the family. Tablecloths available upon request. The Knobs Creek may have come at a cost. Half star docked for unwelcome post-curry considerations.",
     image: "images/IMG-20230428-WA0001.jpg",
-    images: ["images/IMG-20230428-WA0001.jpg","images/IMG-20230501-WA0000.jpg"]
+    images: ["images/IMG-20230428-WA0001.jpg"]
   },
   {
     id: 20,
-    name: "Unknown",
-    location: "Unknown",
+    name: "Cinnamon Tree",
+    location: "Halstead",
     date: "2023-05-12",
     organiser: "Taylor Hickson",
-    pub: "N/A",
+    pub: "The White Hart Inn",
     rating: 3,
     comment: "A sombre evening — Andy's mum passed away that morning. The remaining three carried on in his honour. Scores to follow.",
     image: "images/IMG-20230512-WA0000.jpg",
@@ -245,23 +246,23 @@ const curryNights = [
     location: "Debden",
     date: "2023-06-23",
     organiser: "Wodge",
-    pub: "N/A",
+    pub: "The Plough",
     rating: 3,
     comment: "The original venue shut down days before the booking. Wodge pivoted to Yuva. A strawberry daiquiri made its curry club debut. Shame about the rum.",
     image: "images/IMG-20230623-WA0001.jpg",
-    images: ["images/IMG-20230623-WA0001.jpg","images/IMG-20230623-WA0002.jpg","images/IMG-20230624-WA0001.jpg","images/IMG-20230624-WA0006.jpg","images/IMG-20230626-WA0001.jpg"]
+    images: ["images/IMG-20230623-WA0001.jpg","images/IMG-20230624-WA0001.jpg","images/IMG-20230624-WA0006.jpg"]
   },
   {
     id: 22,
     name: "Zara Dining",
-    location: "Braintree area",
+    location: "Bishops Stortford",
     date: "2023-07-14",
     organiser: "John Garrett",
-    pub: "N/A",
+    pub: "The White Horse",
     rating: 4,
     comment: "All talk of a Gurkha's Revenge amounted to nothing. Taylor was on shift so missed out. Pete's dad had a new hip but Pete still made it.",
     image: "images/IMG-20230714-WA0000.jpg",
-    images: ["images/IMG-20230714-WA0000.jpg","images/IMG-20230714-WA0001.jpg","images/IMG-20230715-WA0000.jpg"]
+    images: ["images/IMG-20230714-WA0000.jpg","images/IMG-20230714-WA0001.jpg"]
   },
   {
     id: 23,
@@ -269,30 +270,30 @@ const curryNights = [
     location: "Stansted Mountfitchet",
     date: "2023-09-22",
     organiser: "Andy Bott",
-    pub: "N/A",
+    pub: "The Queens Head",
     rating: 3,
     comment: "Revisiting Stansted Mountfitchet. Andy was still deciding location the day before. Table booked for 8pm, pickup at 7:15.",
     image: "images/IMG-20230922-WA0000.jpg"
   },
   {
     id: 24,
-    name: "Unknown",
-    location: "Unknown",
+    name: "Shadhona",
+    location: "Bishops Stortford",
     date: "2023-10-13",
     organiser: "Taylor Hickson",
-    pub: "N/A",
+    pub: "The Port Jackson",
     rating: 3.5,
     comment: "Good effort from Taylor. John tried Korean the night before and declared it nowhere near as good as curry. Roger is in the chair for November.",
     image: "images/IMG-20231012-WA0001.jpg",
-    images: ["images/IMG-20231012-WA0001.jpg","images/IMG-20231014-WA0002.jpg","images/IMG-20231014-WA0003.jpg","images/IMG-20231014-WA0004.jpg"]
+    images: ["images/IMG-20231012-WA0001.jpg","images/IMG-20231014-WA0003.jpg"]
   },
   {
     id: 25,
-    name: "The Coriander",
+    name: "Cinnamon",
     location: "Epping",
     date: "2023-11-10",
     organiser: "Wodge",
-    pub: "N/A",
+    pub: "The George & Dragon",
     rating: 4,
     comment: "A cracking 4 star Epping-based restaurant. Here's to you, The Coriander. John was sitting by the door with shoes and coat on, ready whenever.",
     image: "images/IMG-20231110-WA0001.jpg",
@@ -312,23 +313,23 @@ const curryNights = [
   },
   {
     id: 27,
-    name: "Unknown",
-    location: "Unknown",
+    name: "Shahjan Tandoori",
+    location: "Chelmsford",
     date: "2024-01-19",
     organiser: "Andy Bott",
-    pub: "N/A",
+    pub: "Nags Head",
     rating: 4,
     comment: "Mystery location — exciting! A great January meeting, a great choice from Andy. Taylor to come up with something for Feb.",
     image: "images/IMG-20240119-WA0000.jpg",
-    images: ["images/IMG-20240119-WA0000.jpg","images/IMG-20240121-WA0002.jpg"]
+    images: ["images/IMG-20240119-WA0000.jpg"]
   },
   {
     id: 28,
     name: "The Onion Bhaji",
-    location: "Unknown",
+    location: "Sudbury",
     date: "2024-02-09",
     organiser: "Taylor Hickson",
-    pub: "N/A",
+    pub: "The Cock & Bell",
     rating: 4,
     comment: "An amazing upturn in form from Taylor! Great food and a personal pun on the name. Ironically the onion bhajis at The Onion Bhaji let them down a little.",
     image: "images/IMG-20240209-WA0000.jpg",
@@ -336,23 +337,23 @@ const curryNights = [
   },
   {
     id: 29,
-    name: "Unknown",
-    location: "Unknown",
+    name: "Anwar's Exquisite Indian",
+    location: "Hatfield Heath",
     date: "2024-03-01",
     organiser: "Wodge",
     pub: "Local pub",
     rating: 4.5,
     comment: "Pete made a rare appearance and drove! Cracking night — hadn't laughed so much in ages. Good pub, welcoming bar staff, calming 80s ballads and Sheryl the part-time Asda checkout lady who likes a sing song.",
     image: "images/IMG-20240301-WA0000.jpg",
-    images: ["images/IMG-20240301-WA0000.jpg","images/IMG-20240302-WA0000.jpg"]
+    images: ["images/IMG-20240301-WA0000.jpg"]
   },
   {
     id: 30,
-    name: "Sadlers",
-    location: "Unknown",
+    name: "Chandini Indian",
+    location: "Sawbridgeworth",
     date: "2024-04-26",
     organiser: "Taylor Hickson",
-    pub: "N/A",
+    pub: "The Rising Sun",
     rating: 3.5,
     comment: "Added to the Sadlers novelty curry restaurant desert bowl hall of fame. Andy drove as John had no car.",
     image: "images/IMG-20240426-WA0000.jpg",
@@ -360,15 +361,15 @@ const curryNights = [
   },
   {
     id: 31,
-    name: "Unknown",
-    location: "Braintree area",
+    name: "Merchant Spice",
+    location: "Braintree",
     date: "2024-06-08",
     organiser: "Andy Bott",
     pub: "Legends (Braintree)",
     rating: 4,
     comment: "Legends in Braintree from 4pm for pre-curry fun, then curry at 7:45. Pineapple daiquiris on the menu. Variety is the spice of life.",
     image: "images/IMG-20240609-WA0000.jpg",
-    images: ["images/IMG-20240609-WA0000.jpg","images/IMG-20240609-WA0001.jpg","images/IMG-20240609-WA0002.jpg"]
+    images: ["images/IMG-20240609-WA0000.jpg","images/IMG-20240609-WA0001.jpg"]
   },
   {
     id: 32,
@@ -384,38 +385,38 @@ const curryNights = [
   },
   {
     id: 33,
-    name: "Unknown",
+    name: "Maldon Spice",
     location: "Maldon",
     date: "2024-09-13",
     organiser: "Taylor Hickson",
-    pub: "N/A",
+    pub: "Black Rabbit",
     rating: 3,
     comment: "Taylor took the crew to the bright lights and exotic music of Maldon high street. 3 stars with a broken freezer.",
     image: null
   },
   {
     id: 34,
-    name: "Unknown",
-    location: "Unknown",
+    name: "Lounge India",
+    location: "Chelmsford",
     date: "2024-10-25",
     organiser: "Andy Bott",
-    pub: "N/A",
+    pub: "Not Applicable",
     rating: 4,
     comment: "Food was good. Trip Advisor slated the onion bhaji starter as the smallest ever served. The lads needed to check if they do big balls.",
-    image: "images/IMG-20241025-WA0002.jpg",
-    images: ["images/IMG-20241025-WA0002.jpg","images/IMG-20241025-WA0004.jpg","images/IMG-20241026-WA0001.jpg"]
+    image: "images/IMG-20241025-WA0004.jpg",
+    images: ["images/IMG-20241025-WA0004.jpg"]
   },
   {
     id: 35,
-    name: "Unknown",
-    location: "Unknown",
+    name: "Maria's",
+    location: "Coggeshall Hamlet",
     date: "2024-11-22",
     organiser: "Wodge",
-    pub: "N/A",
+    pub: "White Hart",
     rating: 3.5,
     comment: "Pete was at the cinema with Katie. John noted 11 restaurants visited in 2024, about 425 miles covered. No real standout winner but plenty of 4 star reviews.",
     image: "images/IMG-20241122-WA0002.jpg",
-    images: ["images/IMG-20241122-WA0002.jpg","images/IMG-20241125-WA0000.jpg"]
+    images: ["images/IMG-20241122-WA0002.jpg"]
   },
   {
     id: 36,
@@ -427,19 +428,19 @@ const curryNights = [
     rating: 4,
     comment: "Award-winning Christmas curry in Shoreditch. Good night with no Stella distractions. Andy made it to Heathrow on time the next morning. Best Xmas one to date.",
     image: "images/IMG-20241213-WA0000.jpg",
-    images: ["images/IMG-20241213-WA0000.jpg","images/IMG-20241214-WA0000.jpg","images/IMG-20241214-WA0001.jpg","images/IMG-20241214-WA0002.jpg","images/IMG-20241214-WA0003.jpg","images/IMG-20241214-WA0004.jpg","images/IMG-20241214-WA0005.jpg","images/IMG-20241216-WA0000.jpg"]
+    images: ["images/IMG-20241213-WA0000.jpg","images/IMG-20241214-WA0000.jpg","images/IMG-20241214-WA0001.jpg","images/IMG-20241214-WA0002.jpg","images/IMG-20241214-WA0003.jpg","images/IMG-20241214-WA0004.jpg"]
   },
   {
     id: 37,
-    name: "Unknown",
+    name: "Maldon Tandoori",
     location: "Maldon",
     date: "2025-01-31",
     organiser: "Taylor Hickson",
-    pub: "N/A",
+    pub: "Rose & Crown",
     rating: 2.5,
     comment: "Another trip to Maldon. Tablecloths and cock rings but service and food was lacking and expensive. Purple hair and care-home stories was a nice change of pace.",
-    image: "images/IMG-20250129-WA0000.jpg",
-    images: ["images/IMG-20250129-WA0000.jpg","images/IMG-20250203-WA0003.jpg"]
+    image: null,
+    images: []
   },
   {
     id: 38,
@@ -450,63 +451,54 @@ const curryNights = [
     pub: "Saracens Head",
     rating: 3,
     comment: "A medical exemption took them to Dunmow. John forced Andy to watch rugby all afternoon. Third visit to the POS — fun but food was pretty average.",
-    image: "images/IMG-20250225-WA0000.jpg"
+    image: null,
+    images: []
   },
   {
     id: 39,
-    name: "Unknown",
-    location: "Unknown",
+    name: "Wadud I&T Fusion",
+    location: "Bradwell",
     date: "2025-03-28",
     organiser: "Andy Bott",
-    pub: "N/A",
+    pub: "Mulberry Tree",
     rating: 3.5,
     comment: "Pete skipped for a 20-mile run the next morning. He misses the lads though.",
     image: "images/IMG-20250328-WA0001.jpg"
   },
   {
     id: 40,
-    name: "Unknown",
-    location: "Unknown",
+    name: "The Gurkha Restaurant",
+    location: "Chelmsford",
     date: "2025-05-23",
     organiser: "John Garrett",
-    pub: "N/A",
+    pub: "The Ship",
     rating: 3.5,
     comment: "John booked a table hoping it's a good 'un. Vijay Mallya apparently approves.",
     image: "images/IMG-20250523-WA0001.jpg"
   },
   {
     id: 41,
-    name: "Unknown",
-    location: "Unknown",
+    name: "Mowgli Street Food",
+    location: "Chelmsford",
     date: "2025-06-13",
     organiser: "Taylor Hickson",
-    pub: "N/A",
+    pub: "The Golden Fleece",
     rating: 3,
     comment: "Taylor accidentally booked the same place from July 2023. Had to rebook another — all good in the end. Pete was in Wales.",
     image: "images/IMG-20250611-WA0002.jpg",
-    images: ["images/IMG-20250611-WA0002.jpg","images/IMG-20250615-WA0000.jpg"]
-  },
-  {
-    id: 42,
-    name: "Unknown",
-    location: "Unknown",
-    date: "2025-08-01",
-    organiser: "Wodge",
-    pub: "N/A",
-    rating: 3,
-    comment: "Summer curry club session. The tradition continues through the warmer months.",
-    image: "images/IMG-20250801-WA0000.jpg"
+    images: ["images/IMG-20250611-WA0002.jpg"]
   },
   {
     id: 43,
-    name: "Unknown (South Indian)",
-    location: "Unknown",
+    name: "Curry & Cocktails",
+    location: "Chelmsford",
     date: "2025-09-26",
     organiser: "Andy Bott",
-    pub: "N/A",
+    pub: "Wheatsheaf",
     rating: 4,
     comment: "Excellent choice from Andy — really enjoyed some South Indian curry for a change. And no dodgy tummy either!",
-    image: "images/IMG-20250929-WA0000.jpg"
+    image: null,
+    images: []
   },
   {
     id: 44,
@@ -514,44 +506,45 @@ const curryNights = [
     location: "Kelvedon",
     date: "2025-10-24",
     organiser: "Wodge",
-    pub: "N/A",
+    pub: "Angel",
     rating: 3.5,
     comment: "On the high street in Kelvedon. Stephen Brazier made a comeback. Wodge booked for one extra as he had a sixth sense about late takers.",
     image: null
   },
   {
     id: 45,
-    name: "Unknown",
-    location: "Unknown",
+    name: "Cinnamon",
+    location: "North Weald",
     date: "2025-11-21",
     organiser: "John Garrett",
-    pub: "N/A",
+    pub: "Kings Head",
     rating: 3.5,
     comment: "John booked both Nov and Dec restaurants from his sick bed. Then flew to Warsaw for the weekend.",
     image: "images/IMG-20251121-WA0001.jpg"
   },
   {
     id: 46,
-    name: "Mowgli",
-    location: "Unknown",
+    name: "The India",
+    location: "London",
     date: "2025-12-19",
     organiser: "John Garrett",
-    pub: "N/A",
+    pub: "Cross Keys",
     rating: 3.5,
     comment: "2025 Christmas meeting. Shah giggled at Andy's order. Solid 3.5 from Wodge (docked 0.5 for tempting him with sticky toffee pudding then ruining Christmas). Andy raised it to 4. Looking at you, Mowgli.",
     image: null
   },
   {
     id: 47,
-    name: "Unknown",
-    location: "Braintree area",
+    name: "Omar's Tandoori",
+    location: "Hatfield Peveral",
     date: "2026-01-16",
     organiser: "Andy Bott",
-    pub: "N/A",
+    pub: "Duke of Wellington",
     rating: 3,
     comment: "Jeff joined as a new member. Can't maintain a 4 star run forever! Full history screenshot shared for new members' interest.",
-    image: "images/IMG-20260119-WA0001.jpg",
-    images: ["images/IMG-20260119-WA0001.jpg","images/IMG-20260119-WA0002.jpg","images/IMG-20260119-WA0003.jpg","images/IMG-20260119-WA0004.jpg"]
+    image: "images/IMG-20260119-WA0002.jpg",
+    images: ["images/IMG-20260119-WA0002.jpg","images/IMG-20260119-WA0003.jpg","images/IMG-20260119-WA0004.jpg"],
+    attendees: ["John Garrett","Wodge","Andy Bott","Stephen Brazier","Taylor Hickson"]
   },
   {
     id: 48,
@@ -559,21 +552,34 @@ const curryNights = [
     location: "Danbury",
     date: "2026-02-27",
     organiser: "Taylor Hickson",
-    pub: "N/A",
+    pub: "The Anchor",
     rating: 4,
     comment: "Jeff called it a good start with a solid 4 star curry. Taylor squeezed everyone in. Well done Taylor.",
-    image: "images/IMG-20260227-WA0003.jpg"
+    image: "images/IMG-20260227-WA0003.jpg",
+    attendees: ["John Garrett","Wodge","Andy Bott","Taylor Hickson","Jeff"]
   },
   {
     id: 49,
-    name: "Unknown",
-    location: "Unknown",
+    name: "Pakwaan",
+    location: "Writtle",
     date: "2026-03-13",
     organiser: "Wodge",
-    pub: "Local pub",
+    pub: "Rose & Crown, Wheatsheaf",
     rating: 4,
     comment: "Fanciest onion bhaji ever. Personal touch from the chef, pink-haired dancing girls, high-end drinks, variety of desserts. Lost a club member and had a lock-in at the locals' choice. But they had to pay for it!",
     image: "images/IMG-20260313-WA0003.jpg",
-    images: ["images/IMG-20260313-WA0003.jpg","images/IMG-20260313-WA0004.jpg","images/IMG-20260313-WA0005.jpg","images/IMG-20260314-WA0003.jpg"]
+    images: ["images/IMG-20260313-WA0003.jpg","images/IMG-20260313-WA0004.jpg","images/IMG-20260313-WA0005.jpg"],
+    attendees: ["John Garrett","Wodge","Andy Bott","Taylor Hickson","Jeff"]
+  },
+  {
+    id: 50,
+    name: "Dosa Paratha Corner",
+    location: "Saffron Walden",
+    date: "2025-04-17",
+    organiser: "Wodge",
+    pub: "Maypole",
+    rating: 3,
+    comment: "Quite Niche",
+    image: null
   }
 ];
