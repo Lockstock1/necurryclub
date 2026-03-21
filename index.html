@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The North Essex Curry Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=15">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <div class="brand" id="brandHome" style="cursor:pointer" role="button" aria-label="Back to home">
+        <div>
+          <h1>The North Essex Curry Club</h1>
+          <span class="brand-sub">Est. October 2021</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <section class="page-section" id="section-home">
+    <div class="hero">
+      <div class="hero-particles" id="heroParticles"></div>
+      <div class="hero-carousel" id="heroCarousel">
+        <div class="hero-carousel-track" id="heroCarouselTrack"></div>
+        <div class="hero-carousel-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <h2 class="hero-title scroll-in">One curry at a time.<br>One story at a time.</h2>
+        <p class="hero-tagline scroll-in scroll-in-delay-1">Four and a half years, <span id="stat-visits">0</span> curry nights, and counting.</p>
+        <div class="hero-stats scroll-in scroll-in-delay-1">
+          <div class="stat">
+            <span class="stat-number" id="stat-restaurants">0</span>
+            <span class="stat-label">Restaurants</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="stat-avg">0</span>
+            <span class="stat-label">Avg Rating</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="stat-members">8</span>
+            <span class="stat-label">Members</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="stat-years">4.5+</span>
+            <span class="stat-label">Years Strong</span>
+          </div>
+        </div>
+        <div class="hero-nav-grid scroll-in scroll-in-delay-2">
+          <button class="hero-nav-btn" data-section="restaurants"><span class="hero-nav-icon">🍽️</span>Restaurants</button>
+          <button class="hero-nav-btn" data-section="timeline"><span class="hero-nav-icon">📅</span>Timeline</button>
+          <button class="hero-nav-btn" data-section="members"><span class="hero-nav-icon">👥</span>The Lads</button>
+          <button class="hero-nav-btn" data-section="fame"><span class="hero-nav-icon">🏆</span>Hall of Fame</button>
+          <button class="hero-nav-btn" data-section="leaderboard"><span class="hero-nav-icon">🏅</span>Leaderboard</button>
+          <button class="hero-nav-btn" data-section="map"><span class="hero-nav-icon">📍</span>Where We've Been</button>
+          <button class="hero-nav-btn" data-section="rules"><span class="hero-nav-icon">📜</span>Rules</button>
+          <button class="hero-nav-btn" data-section="edit"><span class="hero-nav-icon">⚙️</span>Edit Entries</button>
+        </div>
+      </div>
+    </div>
+    <!-- Countdown -->
+    <div class="countdown-bar scroll-in" id="countdownBar" hidden>
+      <div class="countdown-label">🍛 Next Curry Night</div>
+      <div class="countdown-timer" id="countdownTimer"></div>
+      <div class="countdown-date" id="countdownDate"></div>
+    </div>
+    <!-- Ticker -->
+    <div class="ticker-strip">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+    <!-- Footer quote -->
+    <div class="home-quote">
+      <p id="footerQuote"></p>
+    </div>
+  </section>
+
+  <!-- LEADERBOARD -->
+  <section class="page-section" id="section-leaderboard" hidden>
+    <div class="section-top-bar">
+      <button class="btn-back" data-section="home">← Home</button>
+    </div>
+    <h3 class="section-title">🏅 Organiser Leaderboard</h3>
+    <p class="section-subtitle">Who's been pulling their weight?</p>
+    <div class="leaderboard-grid" id="leaderboardGrid"></div>
+  </section>
+
+  <!-- MAP -->
+  <section class="page-section" id="section-map" hidden>
+    <div class="section-top-bar">
+      <button class="btn-back" data-section="home">← Home</button>
+    </div>
+    <div class="home-section">
+      <h3 class="section-title">📍 Where We've Been</h3>
+      <p class="section-subtitle">Our curry trail across North Essex and beyond</p>
+      <div class="map-container" id="curryMap"></div>
+    </div>
+  </section>
+
+  <!-- RESTAURANTS -->
+  <section class="page-section" id="section-restaurants" hidden>
+    <div class="section-top-bar">
+      <button class="btn-back" data-section="home">← Home</button>
+    </div>
+    <h3 class="section-title">🍽️ Restaurants</h3>
+    <div class="controls-bar">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Search restaurants, locations, organisers..." aria-label="Search restaurants">
+      </div>
+      <div class="filter-group">
+        <label for="sortSelect">Sort</label>
+        <select id="sortSelect" aria-label="Sort restaurants">
+          <option value="date-desc">Latest First</option>
+          <option value="date-asc">Oldest First</option>
+          <option value="rating-desc">Highest Rated</option>
+          <option value="rating-asc">Lowest Rated</option>
+          <option value="name-asc">Name A-Z</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="organiserFilter">Organiser</label>
+        <select id="organiserFilter" aria-label="Filter by organiser">
+          <option value="all">All</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="ratingFilter">Min Rating</label>
+        <select id="ratingFilter" aria-label="Filter by minimum rating">
+          <option value="0">Any</option>
+          <option value="1">★+</option>
+          <option value="2">★★+</option>
+          <option value="3">★★★+</option>
+          <option value="4">★★★★+</option>
+          <option value="5">★★★★★</option>
+        </select>
+      </div>
+      <span class="results-count"><span id="resultsCount">0</span> found</span>
+    </div>
+    <div class="cards-grid" id="cardsGrid"></div>
+    <div class="no-results" id="noResults" hidden>
+      <span class="no-results-emoji">🍽️</span>
+      <p>No curry nights match your search.</p>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="page-section" id="section-timeline" hidden>
+    <div class="section-top-bar">
+      <button class="btn-back" data-section="home">← Home</button>
+    </div>
+    <h3 class="section-title">📅 Timeline</h3>
+    <p class="section-subtitle">Every curry night, most recent first</p>
+    <div class="timeline-view" id="timelineView"></div>
+  </section>
+
+  <!-- THE LADS -->
+  <section class="page-section" id="section-members" hidden>
+    <div class="section-top-bar">
+      <button class="btn-back" data-section="home">← Home</button>
+    </div>
+    <h3 class="section-title">The Lads</h3>
+    <p class="section-subtitle">The brave souls of the Curry Club</p>
+    <div class="members-grid" id="membersGrid"></div>
+  </section>
+
+  <!-- HALL OF FAME -->
+  <section class="page-section" id="section-fame" hidden>
+    <div class="section-top-bar">
+      <button class="btn-back" data-section="home">← Home</button>
+    </div>
+    <h3 class="section-title">🏆 Hall of Fame</h3>
+    <p class="section-subtitle">The highs, the lows, and the legendary</p>
+    <div class="fame-grid" id="fameGrid"></div>
+  </section>
+
+  <!-- RULES -->
+  <section class="page-section" id="section-rules" hidden>
+    <div class="section-top-bar">
+      <button class="btn-back" data-section="home">← Home</button>
+    </div>
+    <div class="rules-container">
+      <h3 class="section-title">📜 The Rules</h3>
+      <div class="rules-card">
+        <ol class="rules-list">
+          <li>
+            <span class="rule-icon">🔄</span>
+            <div>
+              <strong>Rotating Organiser</strong>
+              <p>A different member takes on the role of organiser for each month's meeting.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rule-icon">🆕</span>
+            <div>
+              <strong>New Restaurant Every Time</strong>
+              <p>We visit an Indian restaurant we have never visited before each time.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rule-icon">🍛</span>
+            <div>
+              <strong>New Dish Every Time</strong>
+              <p>We each choose a main dish that we have never had before. Restaurant specials are your friend.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rule-icon">🍺</span>
+            <div>
+              <strong>Pub Before &amp; After</strong>
+              <p>We like to visit a pub before and after the meal.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rule-icon">🍨</span>
+            <div>
+              <strong>Always Have Dessert</strong>
+              <p>We always have dessert in the Indian if it's available.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rule-icon">🚗</span>
+            <div>
+              <strong>Maximise Drink Opportunities</strong>
+              <p>We like to maximise alcoholic drink consumption opportunities for the group — this should be considered when thinking about transport.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rule-icon">🤫</span>
+            <div>
+              <strong>Don't Talk About Curry Club</strong>
+              <p>What happens at Curry Club stays at Curry Club.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDIT ENTRIES -->
+  <section class="page-section" id="section-edit" hidden>
+    <div class="section-top-bar">
+      <button class="btn-back" data-section="home">← Home</button>
+    </div>
+    <div class="admin-container">
+      <h3 class="section-title">⚙️ Edit Entries</h3>
+      <!-- Password Gate -->
+      <div class="password-gate" id="passwordGate">
+        <div class="password-gate-card">
+          <span class="password-gate-icon">🔒</span>
+          <h4>Members Only</h4>
+          <p>Enter the curry club password to access editing.</p>
+          <div class="password-gate-form">
+            <input type="password" id="passwordInput" placeholder="Enter password..." autocomplete="off">
+            <button class="btn-primary" id="passwordSubmit">Unlock</button>
+          </div>
+          <p class="password-error" id="passwordError" hidden>Wrong password. Try again.</p>
+        </div>
+      </div>
+      <!-- Admin content (hidden until authenticated) -->
+      <div class="admin-inner" id="adminInner" hidden>
+        <p class="section-subtitle">Click any cell to edit — unknowns highlighted in orange — changes save automatically</p>
+        <div class="next-event-setter">
+          <label for="nextEventDate">📅 Next Curry Night:</label>
+          <input type="date" id="nextEventDate">
+          <button class="btn-primary btn-sm" id="setNextEvent">Set</button>
+          <button class="btn-secondary btn-sm" id="clearNextEvent">Clear</button>
+          <span class="next-event-status" id="nextEventStatus"></span>
+        </div>
+      <div class="admin-top-bar">
+        <button class="btn-add-toggle" id="addToggleBtn">➕ Add New Curry Night</button>
+      </div>
+      <div class="add-form-collapsible" id="addFormWrap" hidden>
+        <form class="add-form" id="addForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="addDate">Date</label>
+              <input type="date" id="addDate" required>
+            </div>
+            <div class="form-group">
+              <label for="addName">Restaurant Name</label>
+              <input type="text" id="addName" placeholder="e.g. Pride of Sylhet" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="addLocation">Location</label>
+              <input type="text" id="addLocation" placeholder="e.g. Great Dunmow" required>
+            </div>
+            <div class="form-group">
+              <label for="addOrganiser">Organiser</label>
+              <select id="addOrganiser" required>
+                <option value="">Select...</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="addPub">Nearest Pub</label>
+              <input type="text" id="addPub" placeholder="e.g. The Chequers">
+            </div>
+            <div class="form-group">
+              <label for="addRating">Rating (0-5)</label>
+              <input type="number" id="addRating" min="0" max="5" step="0.5" placeholder="3.5" required>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="addComment">Comment</label>
+            <textarea id="addComment" rows="3" placeholder="The funny summary..."></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label>Who Attended?</label>
+            <div class="attendees-checkboxes" id="addAttendees"></div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Add Curry Night</button>
+            <button type="reset" class="btn-secondary">Clear</button>
+          </div>
+          <div class="form-message" id="formMessage" hidden></div>
+        </form>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="fixTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Restaurant</th>
+              <th>Location</th>
+              <th>Pub</th>
+              <th>Organiser</th>
+              <th>Rating</th>
+              <th>Comment</th>
+              <th>Attended</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="fixTableBody"></tbody>
+        </table>
+      </div>
+      </div><!-- /admin-inner -->
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Restaurant details" hidden>
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" aria-label="Close details">&times;</button>
+      <div class="lightbox-image-area">
+        <img id="lightboxImage" src="" alt="">
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
+        <div class="lightbox-thumbs" id="lightboxThumbs"></div>
+        <div class="lightbox-photo-count" id="lightboxPhotoCount"></div>
+      </div>
+      <div class="lightbox-details">
+        <div class="lightbox-number" id="lightboxNumber"></div>
+        <h2 id="lightboxName"></h2>
+        <div class="lightbox-rating" id="lightboxRating"></div>
+        <div class="lightbox-meta">
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span id="lightboxLocation"></span>
+          </div>
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Organised by <strong id="lightboxOrganiser"></strong></span>
+          </div>
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span id="lightboxDate"></span>
+          </div>
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+            <span>Nearest pub: <strong id="lightboxPub"></strong></span>
+          </div>
+        </div>
+        <div class="lightbox-comment">
+          <p id="lightboxComment"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="data.js?v=15"></script>
+  <script src="app.js?v=15"></script>
+</body>
+</html>
