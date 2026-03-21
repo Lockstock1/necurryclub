@@ -73,13 +73,15 @@ body {
 
 .brand h1 {
   font-family: var(--font-display);
-  font-size: 2.4rem;
+  font-size: clamp(1.3rem, 5vw, 2.4rem);
   font-weight: 900;
   line-height: 1.1;
   background: linear-gradient(135deg, var(--color-text), var(--color-primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 .brand-sub {
@@ -1966,6 +1968,8 @@ body {
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .header-inner { height: auto; padding: 12px 16px; }
+  .brand { text-align: center; }
+  .section-top-bar { top: auto; position: relative; }
   .controls-bar { flex-direction: column; padding: 12px 16px; }
   .cards-grid { grid-template-columns: 1fr; padding: 16px; }
   .leaderboard-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1981,6 +1985,8 @@ body {
   .stat-number { font-size: 1.8rem; }
   .hero-nav-grid { grid-template-columns: repeat(2, 1fr); }
   .form-row { flex-direction: column; }
+  .password-gate-form { flex-direction: column; }
+  .next-event-setter { flex-direction: column; align-items: stretch; }
 }
 
 @media (max-width: 480px) {
