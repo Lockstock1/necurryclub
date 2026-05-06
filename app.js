@@ -300,9 +300,11 @@
 
     leaders.forEach((leader, i) => {
       const medal = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+      const rank = i + 1;
       const card = document.createElement('div');
       card.className = 'leader-card' + (medal ? ' ' + medal : '');
       card.innerHTML =
+        '<div class="leader-rank">#' + rank + '</div>' +
         '<div class="leader-avatar">' + leader.name.charAt(0) + '</div>' +
         '<div class="leader-name">' + leader.name + '</div>' +
         '<div class="leader-stat">' + leader.count + ' nights organised</div>' +
@@ -363,15 +365,7 @@
       'Saffron Walden': [52.0230, 0.2430]
     };
 
-    // Group visits by location
-    var locationVisits = {};
-    curryNights.forEach(function (r) {
-      if (needsEdit(r.location)) return;
-      var loc = r.location;
-      if (!locationVisits[loc]) locationVisits[loc] = [];
-      locationVisits[loc].push(r);
-    });
-
+    // Place a pin per restaurant (offset slightly for same-location)
     var curryIcon = L.divIcon({
       className: 'map-marker',
       html: '<div style="background:linear-gradient(135deg,#14b8a6,#0d9488);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;border:2px solid #0b1120;box-shadow:0 2px 8px rgba(0,0,0,0.4);">🍛</div>',
@@ -380,14 +374,22 @@
       popupAnchor: [0, -16]
     });
 
-    Object.keys(locationVisits).forEach(function (loc) {
-      var coords = locationCoords[loc];
+    var usedCoords = {};
+    curryNights.forEach(function (r) {
+      if (needsEdit(r.location)) return;
+      var coords = locationCoords[r.location];
       if (!coords) return;
-      var visits = locationVisits[loc];
-      var names = visits.map(function (r) { return r.name + ' (' + r.rating + '★)'; }).join('<br>');
-      var popup = '<div class="map-popup-title">' + loc + '</div>' +
-        '<div class="map-popup-meta">' + visits.length + ' visit' + (visits.length > 1 ? 's' : '') + '<br>' + names + '</div>';
-      L.marker(coords, { icon: curryIcon }).addTo(map).bindPopup(popup);
+
+      // Offset pins at the same location so they don't stack
+      var key = coords[0] + ',' + coords[1];
+      if (!usedCoords[key]) usedCoords[key] = 0;
+      var offset = usedCoords[key] * 0.002;
+      usedCoords[key]++;
+      var pinCoords = [coords[0] + (offset * Math.cos(usedCoords[key])), coords[1] + (offset * Math.sin(usedCoords[key]))];
+
+      var popup = '<div class="map-popup-title">#' + r.id + ' ' + r.name + '</div>' +
+        '<div class="map-popup-meta">' + r.location + '<br>' + r.rating + '★ — ' + r.organiser + '<br>' + formatDate(r.date) + '</div>';
+      L.marker(pinCoords, { icon: curryIcon }).addTo(map).bindPopup(popup);
     });
   })();
 
@@ -499,6 +501,16 @@
     opt.value = org;
     opt.textContent = org;
     organiserFilter.appendChild(opt);
+  });
+
+  // ---- Populate Location Filter ----
+  const locationFilter = document.getElementById('locationFilter');
+  const locations = [...new Set(curryNights.filter(r => !needsEdit(r.location)).map(r => r.location))].sort();
+  locations.forEach(loc => {
+    const opt = document.createElement('option');
+    opt.value = loc;
+    opt.textContent = loc;
+    locationFilter.appendChild(opt);
   });
 
   // ---- Members Tab ----
@@ -834,6 +846,7 @@
     let data = [...curryNights];
     const query = searchInput.value.toLowerCase().trim();
     const org = organiserFilter.value;
+    const loc = locationFilter.value;
     const minRating = parseInt(ratingFilter.value, 10);
     const sort = sortSelect.value;
 
@@ -847,6 +860,7 @@
       );
     }
     if (org !== 'all') data = data.filter(item => item.organiser === org);
+    if (loc !== 'all') data = data.filter(item => item.location === loc);
     if (minRating > 0) data = data.filter(item => item.rating >= minRating);
 
     switch (sort) {
@@ -874,6 +888,7 @@
   });
   sortSelect.addEventListener('change', render);
   organiserFilter.addEventListener('change', render);
+  locationFilter.addEventListener('change', render);
   ratingFilter.addEventListener('change', render);
 
   // ---- Hall of Fame ----

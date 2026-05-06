@@ -491,6 +491,13 @@ body {
   margin: 0 auto 10px;
 }
 
+.leader-rank {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-text-dim);
+  margin-bottom: 6px;
+}
+
 .leader-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
 .leader-stat { font-size: 0.75rem; color: var(--color-text-muted); }
 
