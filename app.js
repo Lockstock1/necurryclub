@@ -709,7 +709,12 @@
     nameEl.textContent = item.name;
     locEl.textContent = item.location;
     pubEl.textContent = item.pub;
-    commentEl.textContent = '"' + item.comment + '"';
+
+    // Format comment with line breaks and bold section headers
+    const formatted = item.comment
+      .replace(/\n/g, '<br>')
+      .replace(/(THE FOOD:|THE MAINS:|DESSERT & BILL:|FINAL THOUGHT:)/g, '<strong>$1</strong>');
+    commentEl.innerHTML = '"' + formatted + '"';
 
     makeEditable(nameEl, item, 'name');
     makeEditable(locEl, item, 'location');
