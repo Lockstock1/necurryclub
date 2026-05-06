@@ -581,5 +581,17 @@ const curryNights = [
     rating: 3,
     comment: "Quite Niche",
     image: null
+  },
+  {
+    id: 51,
+    name: "The Mogul",
+    location: "Ongar",
+    date: "2026-04-24",
+    organiser: "John Garrett",
+    pub: "The Cock Tavern",
+    rating: 4.5,
+    comment: "Complimentary corn ribs were fantastic, beef curry was the absolute highlight — rare to see beef on an Indian menu. Rezala, Methi, Duck Kormari and a Bengal Biryani so big it needed a doggy bag. Onion bhajis didn't disappoint. A great meal, lively conversation, and a new member.",
+    image: null,
+    attendees: ["John Garrett","Wodge","Andy Bott","Taylor Hickson","Jeff","Big Guy (Stu)"]
   }
 ];

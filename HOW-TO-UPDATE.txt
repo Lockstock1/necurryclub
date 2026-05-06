@@ -1,0 +1,78 @@
+=====================================================
+HOW TO UPDATE THE NORTH ESSEX CURRY CLUB WEBSITE
+=====================================================
+
+Live site: https://lockstock1.github.io/necurryclub/
+Repo:      https://github.com/Lockstock1/necurryclub
+
+-----------------------------------------------------
+OPTION A: EDIT DATA.JS DIRECTLY
+-----------------------------------------------------
+1. Open data.js in a text editor (e.g. VS Code, Notepad++)
+2. Find the entry you want to change (search by id or restaurant name)
+3. Edit the fields (name, location, pub, rating, comment, etc.)
+4. Save the file
+5. Push to GitHub (see PUSHING CHANGES below)
+
+To ADD a new entry:
+- Copy an existing entry block at the end of the array (before the closing ];)
+- Change the id to the next number
+- Fill in the details
+- Save and push
+
+To DELETE an entry:
+- Remove the entire { ... }, block for that entry
+- Save and push
+
+-----------------------------------------------------
+OPTION B: EDIT VIA THE WEBSITE UI, THEN EXPORT
+-----------------------------------------------------
+1. Open your local site: http://localhost:8080
+   (start the server: python -m http.server 8080)
+2. Go to Edit Entries, unlock with password: curryclub2021!
+3. Make your edits (click cells, add entries, remove photos, etc.)
+4. Open browser console (F12 > Console tab)
+5. Type: exportCurryEdits()
+6. Copy the JSON output
+7. Merge those changes into data.js manually, or ask Kiro to do it
+8. Push to GitHub (see below)
+
+-----------------------------------------------------
+PUSHING CHANGES TO GITHUB
+-----------------------------------------------------
+Open a terminal in the project folder and run:
+
+    git add -A
+    git commit -m "Updated curry nights"
+    git push
+
+If git is not found, run this first:
+    set PATH=%PATH%;C:\Program Files\Git\cmd
+
+The live site updates automatically within 1-2 minutes.
+
+-----------------------------------------------------
+CHANGING THE EDIT PASSWORD
+-----------------------------------------------------
+1. Open browser console and run (replace yournewpassword):
+   crypto.subtle.digest('SHA-256', new TextEncoder().encode('yournewpassword')).then(b => console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')))
+2. Copy the hex string it prints
+3. Open app.js, find EDIT_PASSWORD_HASH and replace the value
+4. Save and push
+
+Current password: curryclub2021!
+
+-----------------------------------------------------
+BUMPING THE CACHE VERSION (if changes don't show)
+-----------------------------------------------------
+In index.html, find all ?v=17 references and change to ?v=18
+(or whatever the next number is). This forces browsers to
+reload the latest files.
+
+-----------------------------------------------------
+STARTING THE LOCAL SERVER FOR TESTING
+-----------------------------------------------------
+Open a terminal in the project folder and run:
+    python -m http.server 8080
+
+Then visit: http://localhost:8080
