@@ -396,9 +396,9 @@
       var labelIcon = L.divIcon({
         className: 'map-label-marker',
         html: '<div class="map-label' + ratingClass + '">' + labelText + '</div>',
-        iconSize: [0, 0],
-        iconAnchor: [0, 0],
-        popupAnchor: [0, -8]
+        iconSize: null,
+        iconAnchor: [0, 12],
+        popupAnchor: [0, -12]
       });
 
       var visitDetails = rest.visits.map(function(v) {
