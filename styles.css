@@ -589,8 +589,8 @@ body {
   font-size: 0.68rem;
   font-weight: 600;
   color: #fff;
-  background: rgba(20, 184, 166, 0.9);
-  border: 1px solid rgba(255,255,255,0.3);
+  background: #0d7377;
+  border: 1px solid #0a5c5f;
   border-radius: 4px;
   padding: 2px 6px;
   cursor: pointer;
@@ -600,15 +600,15 @@ body {
 }
 
 .map-label.rating-high {
-  background: rgba(34, 197, 94, 0.9);
+  background: #15803d;
   color: #fff;
-  border-color: rgba(255,255,255,0.3);
+  border-color: #116932;
 }
 
 .map-label.rating-low {
-  background: rgba(249, 115, 22, 0.9);
+  background: #c2410c;
   color: #fff;
-  border-color: rgba(255,255,255,0.3);
+  border-color: #9a3412;
 }
 
 .map-label:hover {
