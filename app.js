@@ -365,30 +365,46 @@
       'Saffron Walden': [52.0230, 0.2430]
     };
 
-    // Place a label per restaurant (offset slightly for same-location)
-    var usedCoords = {};
+    // Group by unique restaurant name + location, one label per restaurant
+    var restaurants = {};
     curryNights.forEach(function (r) {
-      if (needsEdit(r.location)) return;
-      var coords = locationCoords[r.location];
+      if (needsEdit(r.location) || needsEdit(r.name)) return;
+      var key = r.name + '|' + r.location;
+      if (!restaurants[key]) {
+        restaurants[key] = { name: r.name, location: r.location, visits: [] };
+      }
+      restaurants[key].visits.push(r);
+    });
+
+    var usedCoords = {};
+    Object.values(restaurants).forEach(function (rest) {
+      var coords = locationCoords[rest.location];
       if (!coords) return;
 
-      // Offset pins at the same location so they don't stack
-      var key = coords[0] + ',' + coords[1];
-      if (!usedCoords[key]) usedCoords[key] = 0;
-      var offset = usedCoords[key] * 0.004;
-      usedCoords[key]++;
-      var pinCoords = [coords[0] + (offset * Math.cos(usedCoords[key] * 2.5)), coords[1] + (offset * Math.sin(usedCoords[key] * 2.5))];
+      // Offset labels at the same location so they don't stack
+      var coordKey = coords[0] + ',' + coords[1];
+      if (!usedCoords[coordKey]) usedCoords[coordKey] = 0;
+      var offset = usedCoords[coordKey] * 0.004;
+      usedCoords[coordKey]++;
+      var pinCoords = [coords[0] + (offset * Math.cos(usedCoords[coordKey] * 2.5)), coords[1] + (offset * Math.sin(usedCoords[coordKey] * 2.5))];
+
+      var visitCount = rest.visits.length;
+      var avgRating = (rest.visits.reduce(function(s, v) { return s + v.rating; }, 0) / visitCount).toFixed(1);
+      var labelText = rest.name + (visitCount > 1 ? ' ×' + visitCount : '');
 
       var labelIcon = L.divIcon({
         className: 'map-label-marker',
-        html: '<div class="map-label">' + r.name + '</div>',
+        html: '<div class="map-label">' + labelText + '</div>',
         iconSize: [0, 0],
         iconAnchor: [0, 0],
         popupAnchor: [0, -8]
       });
 
-      var popup = '<div class="map-popup-title">#' + r.id + ' ' + r.name + '</div>' +
-        '<div class="map-popup-meta">' + r.location + '<br>' + r.rating + '★ — ' + r.organiser + '<br>' + formatDate(r.date) + '</div>';
+      var visitDetails = rest.visits.map(function(v) {
+        return '#' + v.id + ' ' + v.rating + '★ — ' + formatDate(v.date);
+      }).join('<br>');
+      var popup = '<div class="map-popup-title">' + rest.name + '</div>' +
+        '<div class="map-popup-meta">' + rest.location + '<br>Avg: ' + avgRating + '★ · ' + visitCount + ' visit' + (visitCount > 1 ? 's' : '') + '<br>' + visitDetails + '</div>';
       L.marker(pinCoords, { icon: labelIcon }).addTo(map).bindPopup(popup);
     });
   })();
