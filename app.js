@@ -357,10 +357,10 @@
       'Sudbury': [52.0380, 0.7270],
       'Hatfield Heath': [51.8100, 0.2350],
       'Sawbridgeworth': [51.8140, 0.1530],
-      'Coggeshall Hamlet': [51.8650, 0.6850],
-      'Bradwell': [51.7350, 0.9050],
-      'North Weald': [51.7230, 0.1680],
-      'Hatfield Peveral': [51.7750, 0.5950],
+      'Coggeshall Hamlet': [51.8650, 0.6900],
+      'Bradwell': [51.8150, 0.5750],
+      'North Weald': [51.7193, 0.1680],
+      'Hatfield Peveral': [51.7752, 0.5920],
       'Writtle': [51.7290, 0.4280],
       'Saffron Walden': [52.0230, 0.2430]
     };
@@ -391,10 +391,11 @@
       var visitCount = rest.visits.length;
       var avgRating = (rest.visits.reduce(function(s, v) { return s + v.rating; }, 0) / visitCount).toFixed(1);
       var labelText = rest.name + (visitCount > 1 ? ' ×' + visitCount : '');
+      var ratingClass = parseFloat(avgRating) >= 4 ? ' rating-high' : parseFloat(avgRating) < 3 ? ' rating-low' : '';
 
       var labelIcon = L.divIcon({
         className: 'map-label-marker',
-        html: '<div class="map-label">' + labelText + '</div>',
+        html: '<div class="map-label' + ratingClass + '">' + labelText + '</div>',
         iconSize: [0, 0],
         iconAnchor: [0, 0],
         popupAnchor: [0, -8]
