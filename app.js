@@ -376,6 +376,21 @@
       restaurants[key].visits.push(r);
     });
 
+    var markers = L.markerClusterGroup({
+      maxClusterRadius: 35,
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      iconCreateFunction: function(cluster) {
+        var count = cluster.getChildCount();
+        return L.divIcon({
+          className: 'map-cluster-marker',
+          html: '<div class="map-cluster">' + count + ' restaurants</div>',
+          iconSize: null,
+          iconAnchor: [50, 12]
+        });
+      }
+    });
+
     var usedCoords = {};
     Object.values(restaurants).forEach(function (rest) {
       var coords = locationCoords[rest.location];
@@ -406,8 +421,11 @@
       }).join('<br>');
       var popup = '<div class="map-popup-title">' + rest.name + '</div>' +
         '<div class="map-popup-meta">' + rest.location + '<br>Avg: ' + avgRating + '★ · ' + visitCount + ' visit' + (visitCount > 1 ? 's' : '') + '<br>' + visitDetails + '</div>';
-      L.marker(pinCoords, { icon: labelIcon }).addTo(map).bindPopup(popup);
+      var marker = L.marker(pinCoords, { icon: labelIcon }).bindPopup(popup);
+      markers.addLayer(marker);
     });
+
+    map.addLayer(markers);
   })();
 
   // ---- Ticker ----

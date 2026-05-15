@@ -627,6 +627,29 @@ body {
 .map-label.rating-high:hover { background: #16a34a; }
 .map-label.rating-low:hover { background: #ea580c; }
 
+/* Map Cluster Markers */
+.map-cluster-marker {
+  overflow: visible !important;
+  width: auto !important;
+  height: auto !important;
+  background: none !important;
+  border: none !important;
+}
+
+.map-cluster {
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  background: #1e293b;
+  border: 2px solid var(--color-primary);
+  border-radius: 20px;
+  padding: 4px 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
 .map-legend {
   display: flex;
   gap: 16px;
