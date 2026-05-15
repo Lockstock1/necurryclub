@@ -365,15 +365,7 @@
       'Saffron Walden': [52.0230, 0.2430]
     };
 
-    // Place a pin per restaurant (offset slightly for same-location)
-    var curryIcon = L.divIcon({
-      className: 'map-marker',
-      html: '<div style="background:linear-gradient(135deg,#14b8a6,#0d9488);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;border:2px solid #0b1120;box-shadow:0 2px 8px rgba(0,0,0,0.4);">🍛</div>',
-      iconSize: [28, 28],
-      iconAnchor: [14, 14],
-      popupAnchor: [0, -16]
-    });
-
+    // Place a label per restaurant (offset slightly for same-location)
     var usedCoords = {};
     curryNights.forEach(function (r) {
       if (needsEdit(r.location)) return;
@@ -383,13 +375,21 @@
       // Offset pins at the same location so they don't stack
       var key = coords[0] + ',' + coords[1];
       if (!usedCoords[key]) usedCoords[key] = 0;
-      var offset = usedCoords[key] * 0.002;
+      var offset = usedCoords[key] * 0.004;
       usedCoords[key]++;
-      var pinCoords = [coords[0] + (offset * Math.cos(usedCoords[key])), coords[1] + (offset * Math.sin(usedCoords[key]))];
+      var pinCoords = [coords[0] + (offset * Math.cos(usedCoords[key] * 2.5)), coords[1] + (offset * Math.sin(usedCoords[key] * 2.5))];
+
+      var labelIcon = L.divIcon({
+        className: 'map-label-marker',
+        html: '<div class="map-label">' + r.name + '</div>',
+        iconSize: [0, 0],
+        iconAnchor: [0, 0],
+        popupAnchor: [0, -8]
+      });
 
       var popup = '<div class="map-popup-title">#' + r.id + ' ' + r.name + '</div>' +
         '<div class="map-popup-meta">' + r.location + '<br>' + r.rating + '★ — ' + r.organiser + '<br>' + formatDate(r.date) + '</div>';
-      L.marker(pinCoords, { icon: curryIcon }).addTo(map).bindPopup(popup);
+      L.marker(pinCoords, { icon: labelIcon }).addTo(map).bindPopup(popup);
     });
   })();
 
