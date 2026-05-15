@@ -334,7 +334,7 @@
     var locationCoords = {
       'Great Dunmow': [51.8722, 0.3622],
       'Chelmsford': [51.7356, 0.4685],
-      'Felsted': [51.8620, 0.4050],
+      'Felsted': [51.8600, 0.4450],
       'Bishops Stortford': [51.8720, 0.1600],
       'Rayne': [51.8700, 0.5200],
       'White Notley': [51.8350, 0.6050],
