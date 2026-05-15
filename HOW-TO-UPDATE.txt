@@ -3,7 +3,8 @@ HOW TO UPDATE THE NORTH ESSEX CURRY CLUB WEBSITE
 =====================================================
 
 Live site: https://lockstock1.github.io/necurryclub/
-Repo:      https://github.com/Lockstock1/necurryclub
+Short link: https://bit.ly/necurryclub
+Repo:       https://github.com/Lockstock1/necurryclub
 
 -----------------------------------------------------
 OPTION A: EDIT DATA.JS DIRECTLY
