@@ -604,6 +604,7 @@ const curryNights = [
     rating: 4.5,
     comment: "My first booking, and have to say pretty pleased, a great start, food with real gold, a selection of deserts as good as I've ever had anywhere, and not just chocolates to finish, cubes of cheesecake, really hard to fault, only deductions food could have been hotter, and loss of authentic atmosphere, but a strong 4.5+ for me, would definitely go again, one for date night",
     image: "images/Tanishq_ongar.jpg",
+    images: ["images/Tanishq_ongar.jpg","images/Tanishq_2nd.jpeg"],
     attendees: ["John Garrett","Wodge","Andy Bott","Jeff"]
   }
 ];
