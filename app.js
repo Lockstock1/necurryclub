@@ -1073,7 +1073,7 @@
         '<td class="' + (needsEdit(item.name) ? 'cell-unknown' : 'cell-ok') + '" data-field="name">' + item.name + '</td>' +
         '<td class="' + (needsEdit(item.location) ? 'cell-unknown' : 'cell-ok') + '" data-field="location">' + item.location + '</td>' +
         '<td class="' + (needsEdit(item.pub) ? 'cell-unknown' : 'cell-ok') + '" data-field="pub">' + item.pub + '</td>' +
-        '<td class="cell-ok">' + item.organiser + '</td>' +
+        '<td class="cell-ok" data-field="organiser">' + item.organiser + '</td>' +
         '<td class="col-rating">' + item.rating + '★</td>' +
         '<td class="col-comment cell-ok" data-field="comment">' + item.comment.substring(0, 80) + (item.comment.length > 80 ? '...' : '') + '</td>' +
         '<td class="col-attendees" data-field="attendees">' + attendeesList + '</td>' +
@@ -1181,11 +1181,39 @@
       // Make editable cells clickable
       tr.querySelectorAll('[data-field]').forEach(td => {
         td.addEventListener('click', () => {
-          if (td.querySelector('input, textarea, .attendees-edit')) return;
+          if (td.querySelector('input, textarea, select, .attendees-edit')) return;
           const field = td.dataset.field;
           const current = item[field];
 
-          if (field === 'attendees') {
+          if (field === 'organiser') {
+            // Show dropdown for organiser
+            td.textContent = '';
+            td.classList.add('cell-editing');
+            const select = document.createElement('select');
+            select.style.cssText = 'width:100%;padding:4px 6px;background:var(--color-surface);border:1px solid var(--color-primary);border-radius:4px;color:var(--color-text);font-family:var(--font-body);font-size:0.82rem;';
+            const activeOrgMembers = members.filter(m => !m.role.includes('Retired'));
+            activeOrgMembers.forEach(m => {
+              const opt = document.createElement('option');
+              opt.value = m.name;
+              opt.textContent = m.name;
+              if (m.name === current) opt.selected = true;
+              select.appendChild(opt);
+            });
+            td.appendChild(select);
+            select.focus();
+            select.addEventListener('change', () => {
+              const val = select.value;
+              if (val !== current) {
+                item.organiser = val;
+                saveEdit(item.id, 'organiser', val);
+              }
+              renderFixTable();
+              refreshAfterEdit();
+            });
+            select.addEventListener('blur', () => {
+              renderFixTable();
+            });
+          } else if (field === 'attendees') {
             // Show checkboxes for attendees
             td.textContent = '';
             td.classList.add('cell-editing');
