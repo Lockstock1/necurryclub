@@ -1293,20 +1293,14 @@
       toggleBtn.textContent = showing ? '➕ Add New Curry Night' : '✕ Close Form';
     });
 
-    // Populate organiser dropdown
-    const allOrgs = [...new Set(curryNights.map(r => r.organiser))].sort();
-    allOrgs.forEach(org => {
+    // Populate organiser dropdown from full members list (excluding retired)
+    const activeOrgMembers = members.filter(m => !m.role.includes('Retired'));
+    activeOrgMembers.forEach(m => {
       const opt = document.createElement('option');
-      opt.value = org;
-      opt.textContent = org;
+      opt.value = m.name;
+      opt.textContent = m.name;
       addOrganiser.appendChild(opt);
     });
-
-    // Also add an "Other" option
-    const otherOpt = document.createElement('option');
-    otherOpt.value = '__other__';
-    otherOpt.textContent = '— Other (type below) —';
-    addOrganiser.appendChild(otherOpt);
 
     // Populate attendees checkboxes (exclude retired members)
     const attendeesContainer = document.getElementById('addAttendees');
