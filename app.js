@@ -362,7 +362,8 @@
       'North Weald': [51.7193, 0.1680],
       'Hatfield Peveral': [51.7752, 0.5920],
       'Writtle': [51.7290, 0.4280],
-      'Saffron Walden': [52.0230, 0.2430]
+      'Saffron Walden': [52.0230, 0.2430],
+      'Toot Hill Golf Club, Ongar': [51.7150, 0.2100]
     };
 
     // Group by unique restaurant name + location, one label per restaurant

@@ -593,5 +593,17 @@ const curryNights = [
     comment: "Rating: 4.5/5 | Quite opinionated | Attendees: 6\n\nHaving tried the competition on the high street, it was now The Mogul's turn. We were seated promptly in the centre of the room and got the drinks in: Cobras for the passengers, Cokes for the drivers.\n\nTHE FOOD: We started with thin, crisp poppadoms, onion salad and a decent mango chutney. The menu is genuinely interesting, featuring plenty of dishes we'd never encountered. The staff were attentive too, keeping a close eye on our glasses. They even sent over complimentary starters: chicken wings and corn ribs with a spicy dressing. The wings were perfectly nice, but the corn ribs were fantastic. Before the mains, the kitchen brought out two specials with roti. While the chicken was good, the beef curry was the absolute highlight — rare to see beef on an Indian menu, and far too good to be tucked away on a nondescript specials board.\n\nTHE MAINS: Rezala, Methi, and Rizoti — all brand new to us and impressive. Duck Kormari served in a tangy mushroom gravy. Bengal Biryani arrived under a massive pie crust, so substantial the diner had to take half home for tomorrow's lunch. Onion Bhajis — an essential test for our group, and these didn't disappoint. Excellent.\n\nDESSERT & BILL: We had no room left for dessert, which was a shame as the options looked far better than the standard frozen sorbets left over from the last ice age. The bill was very reasonable. We added an extra 10% on top of the service charge to reflect the generous complimentary dishes.\n\nFINAL THOUGHT: The restaurant clearly looked at our order and decided we were missing out on their best dishes. A great meal, some lively conversation, a new member and another enjoyable evening.",
     image: null,
     attendees: ["John Garrett","Wodge","Andy Bott","Taylor Hickson","Jeff","Big Guy (Stu)"]
+  },
+  {
+    id: 52,
+    name: "Tanishq Restaurant & Bar",
+    location: "Toot Hill Golf Club, Ongar",
+    date: "2026-05-22",
+    organiser: "Jeff",
+    pub: "Green Man",
+    rating: 4.5,
+    comment: "My first booking, and have to say pretty pleased, a great start, food with real gold, a selection of deserts as good as I've ever had anywhere, and not just chocolates to finish, cubes of cheesecake, really hard to fault, only deductions food could have been hotter, and loss of authentic atmosphere, but a strong 4.5+ for me, would definitely go again, one for date night",
+    image: "images/Tanishq_ongar.jpg",
+    attendees: ["John Garrett","Wodge","Andy Bott","Jeff"]
   }
 ];
