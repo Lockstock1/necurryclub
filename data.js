@@ -616,7 +616,7 @@ const curryNights = [
     pub: "Jolly Brewers",
     rating: 2.5,
     comment: "Tucked away in a mysterious corner of Bishop\u2019s Stortford \u2014 a part I\u2019m fairly sure wasn\u2019t on any map \u2014 we found Tandoori Cottage hiding among business units, sporting a sign so subtle it was practically playing hide\u2011and\u2011seek. At least the pub was only a two\u2011minute stroll away, which felt like a reassuring anchor to civilisation.\n\nInside, the d\u00e9cor was surprisingly smart, and the bar setup looked ready for a much livelier crowd than the grand total of two other diners we saw all night. The food itself was genuinely good\u2026 but dessert? Let\u2019s just say my strawberry cheesecake was so fresh from the freezer it still had its wrapper on. A bold choice.\n\nPrices were reasonable, but the finale was memorable for all the wrong reasons: no card machine, no cash \u2014 instead, we were handed bank details on a scrap of paper and asked to do a transfer. Very cloak\u2011and\u2011dagger.\n\nOverall, the food carried the night, but everything else felt a bit surreal. A solid 2.5 seems fair.",
-    image: null,
+    image: "images/Tandoori_Cottage.jpg",
     attendees: ["John Garrett","Wodge","Andy Bott"]
   }
 ];
