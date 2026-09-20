@@ -325,9 +325,11 @@
     }).setView([51.82, 0.52], 10);
     curryMapInstance = map;
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-      maxZoom: 18
+    // OpenStreetMap standard tiles — free, no API key required.
+    // (CARTO Voyager tiles now require an API key: carto.com/basemaps/apikey)
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+      maxZoom: 19
     }).addTo(map);
 
     // Known location coordinates
@@ -366,13 +368,17 @@
       'Toot Hill Golf Club, Ongar': [51.7150, 0.2100]
     };
 
-    // Group by unique restaurant name + location, one label per restaurant
+    // Group by unique restaurant name + location, one label per restaurant.
+    // If any visit provides a per-entry `coords: [lat, lng]`, keep the first
+    // one so the restaurant can be pinpointed rather than pinned to the town.
     var restaurants = {};
     curryNights.forEach(function (r) {
       if (needsEdit(r.location) || needsEdit(r.name)) return;
       var key = r.name + '|' + r.location;
       if (!restaurants[key]) {
-        restaurants[key] = { name: r.name, location: r.location, visits: [] };
+        restaurants[key] = { name: r.name, location: r.location, coords: r.coords || null, visits: [] };
+      } else if (!restaurants[key].coords && r.coords) {
+        restaurants[key].coords = r.coords;
       }
       restaurants[key].visits.push(r);
     });
@@ -392,17 +398,38 @@
       }
     });
 
-    var usedCoords = {};
-    Object.values(restaurants).forEach(function (rest) {
-      var coords = locationCoords[rest.location];
-      if (!coords) return;
+    // Prepare entries with resolved coords. Sort precise-coord entries first
+    // so they claim their exact spots; fallback (town-level) entries get
+    // offset if they land in the same ~1km cell.
+    var mapEntries = Object.values(restaurants)
+      .map(function (rest) {
+        return { rest: rest, coords: rest.coords || locationCoords[rest.location] };
+      })
+      .filter(function (e) { return e.coords; })
+      .sort(function (a, b) {
+        return (a.rest.coords ? 0 : 1) - (b.rest.coords ? 0 : 1);
+      });
 
-      // Offset labels at the same location so they don't stack
-      var coordKey = coords[0] + ',' + coords[1];
-      if (!usedCoords[coordKey]) usedCoords[coordKey] = 0;
-      var offset = usedCoords[coordKey] * 0.004;
-      usedCoords[coordKey]++;
-      var pinCoords = [coords[0] + (offset * Math.cos(usedCoords[coordKey] * 2.5)), coords[1] + (offset * Math.sin(usedCoords[coordKey] * 2.5))];
+    var usedCoords = {};
+    mapEntries.forEach(function (entry) {
+      var rest = entry.rest;
+      var coords = entry.coords;
+
+      // Round coord key to ~1km grid so nearby markers (precise + town, or
+      // two nearby towns) still spread apart to avoid overlapping labels.
+      var coordKey = coords[0].toFixed(2) + ',' + coords[1].toFixed(2);
+      var idx = usedCoords[coordKey] || 0;
+      usedCoords[coordKey] = idx + 1;
+
+      var pinCoords;
+      if (idx === 0) {
+        // First marker in this cell — pin exactly (respects precise coords)
+        pinCoords = coords;
+      } else {
+        var offset = idx * 0.004;
+        var angle = (idx + 1) * 2.5;
+        pinCoords = [coords[0] + (offset * Math.cos(angle)), coords[1] + (offset * Math.sin(angle))];
+      }
 
       var visitCount = rest.visits.length;
       var avgRating = (rest.visits.reduce(function(s, v) { return s + v.rating; }, 0) / visitCount).toFixed(1);

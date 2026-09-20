@@ -19,6 +19,10 @@ To ADD a new entry:
 - Copy an existing entry block at the end of the array (before the closing ];)
 - Change the id to the next number
 - Fill in the details
+- Optional: add coords: [lat, lng] to pinpoint the restaurant on the map.
+  Look up the postcode at https://api.postcodes.io/postcodes/<POSTCODE>
+  (returns latitude & longitude). Without coords, the marker falls back to
+  the town-level coordinates in app.js (locationCoords).
 - Save and push
 
 To DELETE an entry:
