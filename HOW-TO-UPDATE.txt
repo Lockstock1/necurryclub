@@ -56,8 +56,23 @@ The old console-based flow is still there if you need it:
 Open F12 > Console, type exportCurryEdits(), copy the JSON.
 
 -----------------------------------------------------
-PUSHING CHANGES TO GITHUB
+PUSHING CHANGES TO GITHUB (3 WAYS, PICK ONE)
 -----------------------------------------------------
+
+EASIEST — DOUBLE-CLICK publish.bat
+Double-click publish.bat in this folder. It will:
+  - Show you what's about to be pushed
+  - Ask for a one-line commit message (press Enter for default)
+  - Stage, commit and push in one go
+  - Show the live site URL when done
+Window stays open so you can read the result.
+
+VS CODE — SOURCE CONTROL PANEL
+In the left sidebar click the Source Control icon (Ctrl+Shift+G),
+type a commit message, click the ✓ (Commit) button, then click
+"..." > Push.
+
+TERMINAL — MANUAL
 Open a terminal in the project folder and run:
 
     git add -A
