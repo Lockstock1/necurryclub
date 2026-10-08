@@ -1,8 +1,14 @@
 // ============================================================
 // CURRY CLUB DATA — Extracted from WhatsApp Chat History
 // ============================================================
-// Images: drop photos into "images/" folder and update the
-// image field, e.g. "images/pride-of-sylhet.jpg"
+// Images: drop photos into "images/" folder and reference them
+// as "images/filename.jpg" in the image / images fields.
+//
+// Optional: coords: [lat, lng] pinpoints the restaurant on the map.
+// Look up a UK postcode's coords at
+//   https://api.postcodes.io/postcodes/<POSTCODE>
+// (or just enter the postcode in the Add Entry form — the site does
+// the lookup automatically).
 //
 // NOTE: Ratings are based on John's scoring from the chat.
 // Where no explicit rating was given, a best estimate is used
@@ -77,8 +83,7 @@ const curryNights = [
     organiser: "Wodge",
     pub: "None nearby",
     rating: 3,
-    comment: "Exclusive use of the restaurant — private dining experience for three. Straight to the Indian, no pub next door.",
-    image: null
+    comment: "Exclusive use of the restaurant — private dining experience for three. Straight to the Indian, no pub next door."
   },
   {
     id: 7,
@@ -99,8 +104,7 @@ const curryNights = [
     organiser: "Stephen Brazier",
     pub: "Kings Arms",
     rating: 1,
-    comment: "Stephen booked it in 'Takley' — Andy's sources confirmed it was Stansted Mountfitchet. Stephen drove as he wasn't in the right frame of mind to drink. Legend status: 1 star.",
-    image: null
+    comment: "Stephen booked it in 'Takley' — Andy's sources confirmed it was Stansted Mountfitchet. Stephen drove as he wasn't in the right frame of mind to drink. Legend status: 1 star."
   },
   {
     id: 9,
@@ -155,8 +159,7 @@ const curryNights = [
     organiser: "Wodge",
     pub: "Battlesford Court",
     rating: 3,
-    comment: "A one-off change in proceedings — Turkish instead of Indian due to a glut of curries. Fun fact: Witham had 34 pubs in the 90s.",
-    image: null
+    comment: "A one-off change in proceedings — Turkish instead of Indian due to a glut of curries. Fun fact: Witham had 34 pubs in the 90s."
   },
   {
     id: 14,
@@ -178,8 +181,7 @@ const curryNights = [
     organiser: "Wodge",
     pub: "The Star",
     rating: 5,
-    comment: "A new 5 star restaurant! Good work Rog! It lived up to its promise — good to have fire again. Stephen made it back on his feet.",
-    image: null
+    comment: "A new 5 star restaurant! Good work Rog! It lived up to its promise — good to have fire again. Stephen made it back on his feet."
   },
   {
     id: 16,
@@ -201,7 +203,6 @@ const curryNights = [
     pub: "The Eagle",
     rating: 2.5,
     comment: "Taylor's debut as organiser. Naan breads inedible, no tablecloths, no music, slow service. John tried hard for a 3 but couldn't do it. Taylor called it totally unfair.",
-    image: null,
     images: []
   },
   {
@@ -213,7 +214,6 @@ const curryNights = [
     pub: "The Cock Inn",
     rating: 3,
     comment: "Return trip to Cafe Masala. Taylor was at Sadler Towers. Stephen made it along this time.",
-    image: null,
     images: []
   },
   {
@@ -391,8 +391,7 @@ const curryNights = [
     organiser: "Taylor Hickson",
     pub: "Black Rabbit",
     rating: 3,
-    comment: "Taylor took the crew to the bright lights and exotic music of Maldon high street. 3 stars with a broken freezer.",
-    image: null
+    comment: "Taylor took the crew to the bright lights and exotic music of Maldon high street. 3 stars with a broken freezer."
   },
   {
     id: 34,
@@ -439,7 +438,6 @@ const curryNights = [
     pub: "Rose & Crown",
     rating: 2.5,
     comment: "Another trip to Maldon. Tablecloths and cock rings but service and food was lacking and expensive. Purple hair and care-home stories was a nice change of pace.",
-    image: null,
     images: []
   },
   {
@@ -451,7 +449,6 @@ const curryNights = [
     pub: "Saracens Head",
     rating: 3,
     comment: "A medical exemption took them to Dunmow. John forced Andy to watch rugby all afternoon. Third visit to the POS — fun but food was pretty average.",
-    image: null,
     images: []
   },
   {
@@ -497,7 +494,6 @@ const curryNights = [
     pub: "Wheatsheaf",
     rating: 4,
     comment: "Excellent choice from Andy — really enjoyed some South Indian curry for a change. And no dodgy tummy either!",
-    image: null,
     images: []
   },
   {
@@ -508,8 +504,7 @@ const curryNights = [
     organiser: "Wodge",
     pub: "Angel",
     rating: 3.5,
-    comment: "On the high street in Kelvedon. Stephen Brazier made a comeback. Wodge booked for one extra as he had a sixth sense about late takers.",
-    image: null
+    comment: "On the high street in Kelvedon. Stephen Brazier made a comeback. Wodge booked for one extra as he had a sixth sense about late takers."
   },
   {
     id: 45,
@@ -530,8 +525,7 @@ const curryNights = [
     organiser: "John Garrett",
     pub: "Cross Keys",
     rating: 3.5,
-    comment: "2025 Christmas meeting. Shah giggled at Andy's order. Solid 3.5 from Wodge (docked 0.5 for tempting him with sticky toffee pudding then ruining Christmas). Andy raised it to 4. Looking at you, Mowgli.",
-    image: null
+    comment: "2025 Christmas meeting. Shah giggled at Andy's order. Solid 3.5 from Wodge (docked 0.5 for tempting him with sticky toffee pudding then ruining Christmas). Andy raised it to 4. Looking at you, Mowgli."
   },
   {
     id: 47,
@@ -579,8 +573,7 @@ const curryNights = [
     organiser: "Wodge",
     pub: "Maypole",
     rating: 3,
-    comment: "Quite Niche",
-    image: null
+    comment: "Quite Niche"
   },
   {
     id: 51,
@@ -591,7 +584,6 @@ const curryNights = [
     pub: "The Cock Tavern",
     rating: 4.5,
     comment: "Rating: 4.5/5 | Quite opinionated | Attendees: 6\n\nHaving tried the competition on the high street, it was now The Mogul's turn. We were seated promptly in the centre of the room and got the drinks in: Cobras for the passengers, Cokes for the drivers.\n\nTHE FOOD: We started with thin, crisp poppadoms, onion salad and a decent mango chutney. The menu is genuinely interesting, featuring plenty of dishes we'd never encountered. The staff were attentive too, keeping a close eye on our glasses. They even sent over complimentary starters: chicken wings and corn ribs with a spicy dressing. The wings were perfectly nice, but the corn ribs were fantastic. Before the mains, the kitchen brought out two specials with roti. While the chicken was good, the beef curry was the absolute highlight — rare to see beef on an Indian menu, and far too good to be tucked away on a nondescript specials board.\n\nTHE MAINS: Rezala, Methi, and Rizoti — all brand new to us and impressive. Duck Kormari served in a tangy mushroom gravy. Bengal Biryani arrived under a massive pie crust, so substantial the diner had to take half home for tomorrow's lunch. Onion Bhajis — an essential test for our group, and these didn't disappoint. Excellent.\n\nDESSERT & BILL: We had no room left for dessert, which was a shame as the options looked far better than the standard frozen sorbets left over from the last ice age. The bill was very reasonable. We added an extra 10% on top of the service charge to reflect the generous complimentary dishes.\n\nFINAL THOUGHT: The restaurant clearly looked at our order and decided we were missing out on their best dishes. A great meal, some lively conversation, a new member and another enjoyable evening.",
-    image: null,
     attendees: ["John Garrett","Wodge","Andy Bott","Taylor Hickson","Jeff","Big Guy (Stu)"]
   },
   {
@@ -615,7 +607,7 @@ const curryNights = [
     organiser: "Andy Bott",
     pub: "Jolly Brewers",
     rating: 2.5,
-    comment: "Tucked away in a mysterious corner of Bishop\u2019s Stortford \u2014 a part I\u2019m fairly sure wasn\u2019t on any map \u2014 we found Tandoori Cottage hiding among business units, sporting a sign so subtle it was practically playing hide\u2011and\u2011seek. At least the pub was only a two\u2011minute stroll away, which felt like a reassuring anchor to civilisation.\n\nInside, the d\u00e9cor was surprisingly smart, and the bar setup looked ready for a much livelier crowd than the grand total of two other diners we saw all night. The food itself was genuinely good\u2026 but dessert? Let\u2019s just say my strawberry cheesecake was so fresh from the freezer it still had its wrapper on. A bold choice.\n\nPrices were reasonable, but the finale was memorable for all the wrong reasons: no card machine, no cash \u2014 instead, we were handed bank details on a scrap of paper and asked to do a transfer. Very cloak\u2011and\u2011dagger.\n\nOverall, the food carried the night, but everything else felt a bit surreal. A solid 2.5 seems fair.",
+    comment: "Tucked away in a mysterious corner of Bishop’s Stortford — a part I’m fairly sure wasn’t on any map — we found Tandoori Cottage hiding among business units, sporting a sign so subtle it was practically playing hide‑and‑seek. At least the pub was only a two‑minute stroll away, which felt like a reassuring anchor to civilisation.\n\nInside, the décor was surprisingly smart, and the bar setup looked ready for a much livelier crowd than the grand total of two other diners we saw all night. The food itself was genuinely good… but dessert? Let’s just say my strawberry cheesecake was so fresh from the freezer it still had its wrapper on. A bold choice.\n\nPrices were reasonable, but the finale was memorable for all the wrong reasons: no card machine, no cash — instead, we were handed bank details on a scrap of paper and asked to do a transfer. Very cloak‑and‑dagger.\n\nOverall, the food carried the night, but everything else felt a bit surreal. A solid 2.5 seems fair.",
     image: "images/Tandoori_Cottage.jpg",
     attendees: ["John Garrett","Wodge","Andy Bott"]
   },
@@ -627,9 +619,9 @@ const curryNights = [
     organiser: "Wodge",
     pub: "The Cricketers",
     rating: 3.5,
-    comment: "Another great curry night.",
+    comment: "Rim Jhim - “Thoroughly good curry house, a solid choice. You’d be made up to have this on your door step! Great food and service. Name aside you’d struggle to remember this place amongst Essex’s other great curry houses. The setting, menu and food are all very good but uninspired. Really needs a better pub in stumbling distance - ideally called the Rusty Trombone…",
     image: "images/Rim_Jhim_Spice.jpg",
-    coords: [51.885511, 0.837832],
+    coords: [51.885511,0.837832],
     attendees: ["John Garrett","Wodge","Andy Bott","Jeff"]
   },
   {
@@ -642,7 +634,7 @@ const curryNights = [
     rating: 3.5,
     comment: "Write-up to follow.",
     image: "images/ifraaz_witham.jpg",
-    coords: [51.797633, 0.637001],
+    coords: [51.797633,0.637001],
     attendees: ["Taylor Hickson","John Garrett","Wodge","Andy Bott","Jeff"]
   }
 ];
