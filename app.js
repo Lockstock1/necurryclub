@@ -1376,13 +1376,45 @@
       attendeesContainer.appendChild(label);
     });
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const newId = Math.max(...curryNights.map(r => r.id)) + 1;
       const organiser = addOrganiser.value === '__other__'
         ? prompt('Enter organiser name:') || 'Unknown'
         : addOrganiser.value;
+
+      // Image filename — accept bare filename or "images/foo.jpg", normalise either way
+      const imageRaw = document.getElementById('addImageFile').value.trim();
+      let imagePath = null;
+      if (imageRaw) {
+        const cleaned = imageRaw.replace(/^\/+/, '').replace(/^images\//i, '');
+        imagePath = 'images/' + cleaned;
+      }
+
+      // Optional postcode -> coords lookup via postcodes.io
+      let coords = null;
+      const postcodeRaw = document.getElementById('addPostcode').value.trim();
+      if (postcodeRaw) {
+        msg.hidden = false;
+        msg.className = 'form-message info';
+        msg.textContent = '🔍 Looking up postcode…';
+        try {
+          const resp = await fetch('https://api.postcodes.io/postcodes/' + encodeURIComponent(postcodeRaw));
+          if (resp.ok) {
+            const data = await resp.json();
+            if (data && data.result && typeof data.result.latitude === 'number') {
+              coords = [data.result.latitude, data.result.longitude];
+            }
+          }
+        } catch (err) {
+          // Network failure — skip coords silently, user can add later
+        }
+        if (!coords) {
+          msg.className = 'form-message info';
+          msg.textContent = '⚠ Postcode lookup failed — entry will be added without pinpoint coords.';
+        }
+      }
 
       const entry = {
         id: newId,
@@ -1394,8 +1426,10 @@
         rating: parseFloat(document.getElementById('addRating').value) || 3,
         comment: document.getElementById('addComment').value.trim() || 'Another great curry night.',
         attendees: [...attendeesContainer.querySelectorAll('input:checked')].map(cb => cb.value),
-        image: null
+        image: imagePath
       };
+      if (imagePath) entry.images = [imagePath];
+      if (coords) entry.coords = coords;
 
       // Add to runtime array
       curryNights.push(entry);
@@ -1406,10 +1440,13 @@
       edits['__added__'].push(entry);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
 
-      // Show success
+      // Show success — include note about image/coords so user knows they were picked up
       msg.hidden = false;
       msg.className = 'form-message success';
-      msg.textContent = '✅ Curry Night #' + newId + ' added!';
+      let successExtra = '';
+      if (imagePath) successExtra += ' · 📷 image linked';
+      if (coords) successExtra += ' · 📍 pinpointed';
+      msg.textContent = '✅ Curry Night #' + newId + ' added!' + successExtra;
 
       form.reset();
       renderFixTable();
@@ -1421,7 +1458,93 @@
         formWrap.hidden = true;
         toggleBtn.classList.remove('active');
         toggleBtn.textContent = '➕ Add New Curry Night';
-      }, 3000);
+      }, 3500);
+    });
+  })();
+
+  // ---- Download Updated data.js ----
+  // Serializes the live curryNights array (with all localStorage edits applied)
+  // back into a drop-in data.js file. Lets the user skip the console export +
+  // manual merge step entirely.
+  (function () {
+    const btn = document.getElementById('downloadDataBtn');
+    if (!btn) return;
+
+    const FIELD_ORDER = ['id', 'name', 'location', 'date', 'organiser', 'pub', 'rating', 'comment', 'image', 'images', 'coords', 'attendees'];
+    const HEADER = '// ============================================================\n' +
+      '// CURRY CLUB DATA — Extracted from WhatsApp Chat History\n' +
+      '// ============================================================\n' +
+      '// Images: drop photos into "images/" folder and reference them\n' +
+      '// as "images/filename.jpg" in the image / images fields.\n' +
+      '//\n' +
+      '// Optional: coords: [lat, lng] pinpoints the restaurant on the map.\n' +
+      '// Look up a UK postcode\'s coords at\n' +
+      '//   https://api.postcodes.io/postcodes/<POSTCODE>\n' +
+      '// (or just enter the postcode in the Add Entry form — the site does\n' +
+      '// the lookup automatically).\n' +
+      '//\n' +
+      '// NOTE: Ratings are based on John\'s scoring from the chat.\n' +
+      '// Where no explicit rating was given, a best estimate is used\n' +
+      '// based on the group\'s comments. Adjust as you see fit!\n' +
+      '// ============================================================\n\n';
+
+    function serializeValue(val) {
+      if (val === null) return 'null';
+      if (typeof val === 'string') return JSON.stringify(val);
+      if (typeof val === 'number' || typeof val === 'boolean') return String(val);
+      if (Array.isArray(val)) {
+        return '[' + val.map(serializeValue).join(',') + ']';
+      }
+      return JSON.stringify(val);
+    }
+
+    function serializeEntry(entry) {
+      const lines = [];
+      const seen = {};
+      FIELD_ORDER.forEach(function (key) {
+        seen[key] = true;
+        if (entry[key] === undefined || entry[key] === null) return;
+        lines.push('    ' + key + ': ' + serializeValue(entry[key]));
+      });
+      // Future-proof: any extra fields we don't know about go on the end
+      Object.keys(entry).forEach(function (key) {
+        if (seen[key]) return;
+        if (entry[key] === undefined || entry[key] === null) return;
+        lines.push('    ' + key + ': ' + serializeValue(entry[key]));
+      });
+      return '  {\n' + lines.join(',\n') + '\n  }';
+    }
+
+    function buildDataJs() {
+      const sorted = curryNights.slice().sort(function (a, b) { return a.id - b.id; });
+      return HEADER + 'const curryNights = [\n' + sorted.map(serializeEntry).join(',\n') + '\n];\n';
+    }
+
+    btn.addEventListener('click', function () {
+      const content = buildDataJs();
+      const blob = new Blob([content], { type: 'text/javascript;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'data.js';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+
+      // Offer to clear local edits — they're now baked into the downloaded file,
+      // so leaving them in localStorage just invites phantom duplicates next time.
+      setTimeout(function () {
+        const clear = confirm(
+          'data.js downloaded (' + curryNights.length + ' entries).\n\n' +
+          'Replace the project\'s data.js with this file, then commit and push.\n\n' +
+          'Clear local edits from this browser now? (recommended — they are already in the downloaded file)'
+        );
+        if (clear) {
+          localStorage.removeItem(STORAGE_KEY);
+          alert('Local edits cleared. Next time you load the live site after pushing, you\'ll be editing a clean slate.');
+        }
+      }, 400);
     });
   })();
 

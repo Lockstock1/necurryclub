@@ -30,17 +30,30 @@ To DELETE an entry:
 - Save and push
 
 -----------------------------------------------------
-OPTION B: EDIT VIA THE WEBSITE UI, THEN EXPORT
+OPTION B: EDIT VIA THE WEBSITE UI (RECOMMENDED)
 -----------------------------------------------------
 1. Open your local site: http://localhost:8080
    (start the server: python -m http.server 8080)
 2. Go to Edit Entries, unlock with password: curryclub2021!
-3. Make your edits (click cells, add entries, remove photos, etc.)
-4. Open browser console (F12 > Console tab)
-5. Type: exportCurryEdits()
-6. Copy the JSON output
-7. Merge those changes into data.js manually, or ask Kiro to do it
+3. For a NEW entry:
+   a. Drop the photo into the images/ folder first
+   b. Click "➕ Add New Curry Night"
+   c. Fill in the form. Image Filename = just the file name
+      you dropped in images/ (e.g. ifraaz_witham.jpg)
+   d. Optional: enter the restaurant's postcode — the site
+      looks up the lat/lng automatically and pinpoints it on the map
+   e. Submit
+4. For edits to existing entries: click cells directly, or use the
+   row actions to remove photos / change attendees, etc.
+5. When you're done, click "⬇ Download Updated data.js"
+6. Save the downloaded file over the project's data.js
+   (default download location, then move it to the project folder)
+7. When prompted, click OK to clear local edits (recommended —
+   otherwise they linger and can create duplicates next time)
 8. Push to GitHub (see below)
+
+The old console-based flow is still there if you need it:
+Open F12 > Console, type exportCurryEdits(), copy the JSON.
 
 -----------------------------------------------------
 PUSHING CHANGES TO GITHUB

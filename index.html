@@ -286,6 +286,7 @@
         </div>
       <div class="admin-top-bar">
         <button class="btn-add-toggle" id="addToggleBtn">➕ Add New Curry Night</button>
+        <button class="btn-secondary" id="downloadDataBtn" title="Download a fresh data.js with every edit, addition and deletion applied. Replace the project file, commit and push.">⬇ Download Updated data.js</button>
       </div>
       <div class="add-form-collapsible" id="addFormWrap" hidden>
         <form class="add-form" id="addForm">
@@ -319,6 +320,16 @@
             <div class="form-group">
               <label for="addRating">Rating (0-5)</label>
               <input type="number" id="addRating" min="0" max="5" step="0.5" placeholder="3.5" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="addImageFile">Image Filename</label>
+              <input type="text" id="addImageFile" placeholder="e.g. ifraaz_witham.jpg (file must be in images/ folder)">
+            </div>
+            <div class="form-group">
+              <label for="addPostcode">Postcode <small style="opacity:.65">(optional, for pinpoint map)</small></label>
+              <input type="text" id="addPostcode" placeholder="e.g. CO3 0RH" maxlength="8">
             </div>
           </div>
           <div class="form-group full-width">
@@ -402,7 +413,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <script src="data.js?v=37"></script>
-  <script src="app.js?v=37"></script>
+  <script src="data.js?v=38"></script>
+  <script src="app.js?v=38"></script>
 </body>
 </html>
