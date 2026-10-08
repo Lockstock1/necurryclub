@@ -2,74 +2,150 @@
 HOW TO UPDATE THE NORTH ESSEX CURRY CLUB WEBSITE
 =====================================================
 
-Live site: https://lockstock1.github.io/necurryclub/
+Live site:  https://lockstock1.github.io/necurryclub/
 Short link: https://bit.ly/necurryclub
 Repo:       https://github.com/Lockstock1/necurryclub
 
+Edit password: curryclub2021!
+
 -----------------------------------------------------
+QUICK VERSION (the usual job)
+-----------------------------------------------------
+1. Drop any new photo into the images/ folder
+2. Open the live site > Edit Entries > unlock
+3. Add the entry (or click a cell to edit an existing one)
+4. Click "⬇ Download Updated data.js"
+5. Save that file over the project's data.js
+6. Click OK when asked to clear local edits
+7. Double-click publish.bat
+
+Everything below is the detail behind those steps.
+
+
+=====================================================
+OPTION B: EDIT VIA THE WEBSITE UI (RECOMMENDED)
+=====================================================
+You can use either the live site or a local copy. The live
+site is simpler — no server to start.
+
+  Live:  https://lockstock1.github.io/necurryclub/
+  Local: http://localhost:8080
+         (start it first: python -m http.server 8080)
+
+Tip: hard-refresh with Ctrl+F5 the first time, so the browser
+picks up the latest files instead of a cached older version.
+
+1. Go to Edit Entries and unlock with the password above.
+
+2. To ADD a new curry night:
+   a. Put the photo in the images/ folder FIRST
+   b. Click "➕ Add New Curry Night"
+   c. Fill in the form:
+      - Image Filename: just the file name you dropped in
+        images/, e.g. ifraaz_witham.jpg (no "images/" prefix
+        needed — it's added for you)
+      - Postcode (optional): e.g. CO3 0RH. The site looks up
+        the lat/lng automatically and pinpoints the restaurant
+        on the map. Leave blank to fall back to a town-level pin.
+      - Everything else is as labelled.
+   d. Submit. The confirmation tells you whether the image and
+      the pinpoint were picked up.
+
+3. To EDIT an existing entry: click any cell in the table and
+   type. Use the row actions to manage photos or change who
+   attended.
+
+4. When you're finished, click "⬇ Download Updated data.js".
+
+5. Save the downloaded file over the project's data.js:
+      C:\Users\abott\OneDrive\KIRO_Folders\CurryClub\data.js
+
+6. Accept the "Clear local edits?" prompt. This matters — if you
+   skip it, your browser keeps a private copy of the changes and
+   can re-add them later as duplicates.
+
+7. Publish (see PUBLISHING below).
+
+WHY THE DIFF LOOKS BIGGER THAN YOUR ONE EDIT
+The Download button rebuilds the whole data.js from scratch, so
+you'll often see tidy-up changes alongside your actual edit:
+  - "image: null" lines disappear (they were doing nothing)
+  - unicode escapes like \u2019 become the real characters ' and —
+  - spacing inside coords arrays tightens up
+None of that changes how the site behaves. Your real edit will be
+in there too.
+
+IMPORTANT: your edits live in the browser until you download
+Edits made in the UI are saved to that browser's local storage, not
+to the website. Nobody else sees them, and they won't appear on your
+phone or another browser, until you download data.js and publish.
+
+OLD CONSOLE METHOD (still works if you need it)
+Open F12 > Console, type: exportCurryEdits()
+That prints the raw edits as JSON for manual merging.
+
+
+=====================================================
 OPTION A: EDIT DATA.JS DIRECTLY
------------------------------------------------------
-1. Open data.js in a text editor (e.g. VS Code, Notepad++)
-2. Find the entry you want to change (search by id or restaurant name)
-3. Edit the fields (name, location, pub, rating, comment, etc.)
-4. Save the file
-5. Push to GitHub (see PUSHING CHANGES below)
+=====================================================
+1. Open data.js in a text editor (e.g. VS Code)
+2. Find the entry (search by id or restaurant name)
+3. Edit the fields
+4. Save, then publish
 
 To ADD a new entry:
-- Copy an existing entry block at the end of the array (before the closing ];)
-- Change the id to the next number
-- Fill in the details
-- Optional: add coords: [lat, lng] to pinpoint the restaurant on the map.
-  Look up the postcode at https://api.postcodes.io/postcodes/<POSTCODE>
-  (returns latitude & longitude). Without coords, the marker falls back to
-  the town-level coordinates in app.js (locationCoords).
-- Save and push
+- Copy an existing entry block at the end of the array
+  (before the closing ];)
+- Change the id to the next number. Currently 54 entries with
+  the highest id being 55 — so the next one is 56. (Ids aren't
+  perfectly sequential: there's no 42. That's fine, ids just
+  need to be unique.)
+- Fill in the details and publish
 
 To DELETE an entry:
 - Remove the entire { ... }, block for that entry
-- Save and push
+- Save and publish
 
------------------------------------------------------
-OPTION B: EDIT VIA THE WEBSITE UI (RECOMMENDED)
------------------------------------------------------
-1. Open your local site: http://localhost:8080
-   (start the server: python -m http.server 8080)
-2. Go to Edit Entries, unlock with password: curryclub2021!
-3. For a NEW entry:
-   a. Drop the photo into the images/ folder first
-   b. Click "➕ Add New Curry Night"
-   c. Fill in the form. Image Filename = just the file name
-      you dropped in images/ (e.g. ifraaz_witham.jpg)
-   d. Optional: enter the restaurant's postcode — the site
-      looks up the lat/lng automatically and pinpoints it on the map
-   e. Submit
-4. For edits to existing entries: click cells directly, or use the
-   row actions to remove photos / change attendees, etc.
-5. When you're done, click "⬇ Download Updated data.js"
-6. Save the downloaded file over the project's data.js
-   (default download location, then move it to the project folder)
-7. When prompted, click OK to clear local edits (recommended —
-   otherwise they linger and can create duplicates next time)
-8. Push to GitHub (see below)
+ENTRY FIELDS
+  id         Unique number. Required.
+  name       Restaurant name
+  location   Town — also used for the map fallback pin
+  date       YYYY-MM-DD
+  organiser  Who booked it
+  pub        Nearest pub, or "N/A"
+  rating     0 to 5, halves allowed (e.g. 3.5)
+  comment    The write-up. Use \n\n for paragraph breaks.
+  image      Cover photo shown on the card,
+             e.g. "images/ifraaz_witham.jpg"
+  images     Optional array for the photo gallery, e.g.
+             ["images/one.jpg","images/two.jpg"]
+             Include the cover photo in here as well.
+  coords     Optional [lat, lng] to pinpoint on the map
+  attendees  Array of names, e.g. ["John Garrett","Wodge"]
 
-The old console-based flow is still there if you need it:
-Open F12 > Console, type exportCurryEdits(), copy the JSON.
+Spell organiser the same way every time (e.g. always "Andy Bott")
+— the Leaderboard and the organiser filter group by that exact
+string, so "Andy" and "Andy Bott" would count as two people.
 
------------------------------------------------------
-PUSHING CHANGES TO GITHUB (3 WAYS, PICK ONE)
------------------------------------------------------
+Attendees are display-only and get shortened to first names on
+screen, but keeping them consistent is still tidier.
+
+
+=====================================================
+PUBLISHING (3 WAYS, PICK ONE)
+=====================================================
 
 EASIEST — DOUBLE-CLICK publish.bat
 Double-click publish.bat in this folder. It will:
   - Show you what's about to be pushed
-  - Ask for a one-line commit message (press Enter for default)
+  - Ask for a one-line commit message (Enter accepts the default)
   - Stage, commit and push in one go
   - Show the live site URL when done
-Window stays open so you can read the result.
+The window stays open so you can read the result.
 
 VS CODE — SOURCE CONTROL PANEL
-In the left sidebar click the Source Control icon (Ctrl+Shift+G),
-type a commit message, click the ✓ (Commit) button, then click
+Click the Source Control icon in the left sidebar (Ctrl+Shift+G),
+type a commit message, click the ✓ (Commit) button, then
 "..." > Push.
 
 TERMINAL — MANUAL
@@ -82,30 +158,79 @@ Open a terminal in the project folder and run:
 If git is not found, run this first:
     set PATH=%PATH%;C:\Program Files\Git\cmd
 
-The live site updates automatically within 1-2 minutes.
+The live site updates automatically within 1-2 minutes of any
+of the above.
 
------------------------------------------------------
+
+=====================================================
+THE MAP
+=====================================================
+Markers are placed one of two ways:
+
+1. PINPOINT — if an entry has a coords: [lat, lng] field, the
+   marker lands exactly there. This is what the Postcode box in
+   the Add Entry form fills in for you.
+
+2. TOWN FALLBACK — with no coords, the marker uses the town-level
+   lookup (locationCoords) near the top of the map section in
+   app.js. If a brand new town isn't in that list, the entry won't
+   appear on the map at all — either add a postcode to the entry,
+   or add the town to locationCoords.
+
+Looking up coords by hand:
+    https://api.postcodes.io/postcodes/CO3%200RH
+Read the "latitude" and "longitude" values out of the response.
+
+Markers that would overlap get nudged apart automatically, so two
+restaurants in the same town both stay readable. Pinpointed entries
+get first claim on their exact spot.
+
+Map tiles come from OpenStreetMap, which needs no API key. (The
+site used CARTO tiles until they started requiring a key and
+stamping "API Key required" across the map.)
+
+
+=====================================================
 CHANGING THE EDIT PASSWORD
------------------------------------------------------
-1. Open browser console and run (replace yournewpassword):
+=====================================================
+1. Open the browser console and run, replacing yournewpassword:
    crypto.subtle.digest('SHA-256', new TextEncoder().encode('yournewpassword')).then(b => console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')))
 2. Copy the hex string it prints
 3. Open app.js, find EDIT_PASSWORD_HASH and replace the value
-4. Save and push
+4. Save, publish, and update the password noted at the top of
+   this file
 
-Current password: curryclub2021!
+Note this is a light lock to stop accidental edits, not real
+security — the page is public and the check runs in the browser.
 
------------------------------------------------------
-BUMPING THE CACHE VERSION (if changes don't show)
------------------------------------------------------
-In index.html, find all ?v=17 references and change to ?v=18
-(or whatever the next number is). This forces browsers to
-reload the latest files.
 
------------------------------------------------------
+=====================================================
+IF YOUR CHANGES DON'T SHOW UP
+=====================================================
+First try a hard refresh: Ctrl+F5.
+
+If they still don't show, bump the cache version. In index.html
+near the bottom, these two currently read:
+
+    <script src="data.js?v=38"></script>
+    <script src="app.js?v=38"></script>
+
+Change both to v=39 (and so on next time). That forces browsers
+to fetch the new files instead of their cached copies.
+
+If you changed styles.css, bump its version too — it's tracked
+separately near the top of index.html and currently reads v=29.
+
+
+=====================================================
 STARTING THE LOCAL SERVER FOR TESTING
------------------------------------------------------
+=====================================================
 Open a terminal in the project folder and run:
+
     python -m http.server 8080
 
 Then visit: http://localhost:8080
+
+Press Ctrl+C in the terminal to stop it when you're done.
+You only need this for testing before publishing — editing
+straight on the live site is usually easier.
